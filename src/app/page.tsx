@@ -53,24 +53,24 @@ const sponsors = [
 const heroStats = ["24 HOURS (12+12)", "100% FREE", "UNDER 18", "30 TEAMS MAX"]
 
 const qualifySteps = [
-  { icon: <Zap className="w-6 h-6" />, step: "01", title: "Register Your Team", desc: "Sign up solo or with up to 3 friends. Under-18 only — no exceptions." },
-  { icon: <Clock className="w-6 h-6" />, step: "02", title: "Show Up & Check In", desc: "Arrive at 9:00 AM with your ID. Get your wristband and workstation." },
-  { icon: <Star className="w-6 h-6" />, step: "03", title: "Attend the Workshop", desc: "Hit the morning bootcamp — Godot, GitHub, quick-start tips." },
-  { icon: <Users className="w-6 h-6" />, step: "04", title: "Lock Your Idea", desc: "At 11:15, lock your track and commit. No pivoting after this." },
-  { icon: <CheckCircle2 className="w-6 h-6" />, step: "05", title: "Build & Submit", desc: "24 hours. Build it, polish it, submit before 14:00 on Day 2. Hard cutoff." },
+  { icon: <Zap className="w-6 h-6" />, step: "01", title: "Assemble Your Crew", desc: "Lock in solo or squad up to 4. Under-18 only — no gatekeeping, just pure builder energy." },
+  { icon: <Clock className="w-6 h-6" />, step: "02", title: "Storm the Gates", desc: "Be there 9AM sharp with ID. Snag your wristband, claim your battlestation — vibe check passed." },
+  { icon: <Star className="w-6 h-6" />, step: "03", title: "Power-Up Workshop", desc: "60-min speedrun: Godot, GitHub, ship-hacks. Go from 'idk' to 'I built that' before lunch." },
+  { icon: <Users className="w-6 h-6" />, step: "04", title: "Lock & Load", desc: "11:15 AM — idea LOCKED. Commit your track. No pivots, no second-guessing. This is your lane." },
+  { icon: <CheckCircle2 className="w-6 h-6" />, step: "05", title: "Build Like Hell", desc: "24 hours. Pure flow state. Push, polish, ship before 2PM Day 2 — clock hits zero, repo freezes." },
 ]
 
 const processSteps = [
-  { icon: <Lightbulb className="w-6 h-6" />, step: "01", title: "Choose", desc: "Choose a problem statement or bring a half-formed thought." },
-  { icon: <Code className="w-6 h-6" />, step: "02", title: "Build", desc: "Full tech-stack freedom — web, mobile, CLI, hardware, whatever works." },
-  { icon: <BookOpen className="w-6 h-6" />, step: "03", title: "Learn", desc: "Mentorship + workshops to help you learn and ship." },
-  { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Show", desc: "Demo + judging at the end — show what you built." },
+  { icon: <Lightbulb className="w-6 h-6" />, step: "01", title: "Spark", desc: "Snag a wild prompt or bring that half-baked note-app idea. If it excites you, it counts." },
+  { icon: <Code className="w-6 h-6" />, step: "02", title: "Ship", desc: "No stack jail — web, mobile, CLI, hardware, AI. If it runs, it roars. Ship fast, fix faster." },
+  { icon: <BookOpen className="w-6 h-6" />, step: "03", title: "Level Up", desc: "Mentors on tap + crash-courses that turn bugs into breakthroughs while you build." },
+  { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Flex", desc: "Own the stage. 3 minutes to demo, dazzle, and make the room remember your name." },
 ]
 
 const rewards = [
-  { icon: <Gift className="w-7 h-7" />, title: "Swag", desc: "Merch kits for top teams." },
-  { icon: <Award className="w-7 h-7" />, title: "Certs", desc: "Certificates for all participants." },
-  { icon: <Users className="w-7 h-7" />, title: "Mentors", desc: "Networking + mentorship access." },
+  { icon: <Gift className="w-7 h-7" />, title: "Drip Drop", desc: "Limited-run merch that hits different — wear the proof you shipped at sunset." },
+  { icon: <Award className="w-7 h-7" />, title: "Certified Legend", desc: "Share-worthy certs + LinkedIn flex your future self will thank you for." },
+  { icon: <Users className="w-7 h-7" />, title: "Plug-In", desc: "DM-access to founders & mentors — the network that actually replies." },
 ]
 
 const rules = [
@@ -87,11 +87,11 @@ const rules = [
 
 function SectionTitle({ children, accent }: { children: React.ReactNode, accent?: boolean }) {
   return (
-    <div className="mb-12">
+    <div className="mb-12 group">
       <h2 className={`text-4xl md:text-5xl font-black tracking-tight text-[#2c2016] leading-tight ${markerFont.className}`}>
         {children}
       </h2>
-      {accent && <div className="mt-3 h-1.5 w-16 rounded-full bg-[#c0392b]" />}
+      {accent && <div className="mt-3 h-1.5 w-16 rounded-full bg-[#c0392b] group-hover:w-28 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-[0_0_10px_rgba(192,57,43,0.4)]" />}
     </div>
   )
 }
@@ -143,10 +143,10 @@ export default function Home() {
           <div className="hero-title cursor-pointer mb-4">
             <div className="hero-title-inner">
               <h1 className={`flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-[4rem] md:text-[9rem] uppercase select-none ${markerFont.className}`}>
-                <span className="bg-[#7ce24a] text-[#c0392b] px-6 py-1 md:px-10 md:py-2 border-[5px] md:border-[7px] border-[#2c2016] -rotate-3 shadow-[-5px_5px_0_#2c2016] rounded-sm inline-block">
+                <span className="bg-[#7ce24a] text-[#c0392b] px-6 py-1 md:px-10 md:py-2 border-[5px] md:border-[7px] border-[#2c2016] -rotate-3 shadow-[-5px_5px_0_#2c2016] rounded-sm inline-block relative overflow-hidden badge-shine">
                   FALLING
                 </span>
-                <span className="text-[#2c2016] rotate-2 drop-shadow-[4px_4px_0_rgba(44,32,22,0.3)]">
+                <span className="text-[#2c2016] rotate-2 drop-shadow-[4px_4px_0_rgba(44,32,22,0.3)] glow-green">
                   SUN
                 </span>
               </h1>
@@ -154,12 +154,12 @@ export default function Home() {
           </div>
 
           <p className="text-[#5a3e2b] font-mono tracking-[0.3em] uppercase text-sm md:text-base font-semibold bg-[#ede4d0]/70 px-6 py-2 rounded-full border border-[#2c2016]/20 backdrop-blur-sm">
-            Under-18 · 24-Hour · Software Hackathon
+            Under-18 · 24-Hour · <span className="text-[#c0392b] font-black">Ship-Or-Die</span> Hackathon
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-2 mt-5 max-w-md">
             {heroStats.map((stat, i) => (
-              <span key={i} className="text-[10px] md:text-xs font-black tracking-widest uppercase bg-[#2c2016] text-[#f2ede4] px-3 py-1.5 rounded-full">
+              <span key={i} className="text-[10px] md:text-xs font-black tracking-widest uppercase bg-[#2c2016] text-[#f2ede4] px-3 py-1.5 rounded-full badge-shine relative overflow-hidden">
                 {stat}
               </span>
             ))}
@@ -167,10 +167,11 @@ export default function Home() {
 
           <a
             href="#contact"
-            className="mt-7 inline-flex items-center gap-2 bg-[#c0392b] text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#a53125] hover:scale-105 transition-all shadow-[4px_4px_0_rgba(44,32,22,0.4)] uppercase tracking-wide text-sm"
+            className="mt-7 inline-flex items-center gap-2 bg-[#c0392b] text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#a53125] hover:scale-105 transition-all shadow-[4px_4px_0_rgba(44,32,22,0.4)] uppercase tracking-wide text-sm group badge-shine relative overflow-hidden"
           >
-            Register Your Team <span aria-hidden="true">→</span>
+            <span className="relative z-10 flex items-center gap-2">Ignite Your Team <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span></span>
           </a>
+          <p className="mt-3 text-[11px] font-mono text-[#8b6340] tracking-widest uppercase opacity-70">30 spots only · first-come, first-ship ✦</p>
         </motion.div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
@@ -181,22 +182,22 @@ export default function Home() {
       {/* ── WHY FALLING SUN ── */}
       <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto relative">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>Why <span className="text-[#c0392b]">Falling Sun?</span></SectionTitle>
+          <SectionTitle accent>Why <span className="flashy-gradient">Falling Sun?</span></SectionTitle>
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Text */}
           <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }} className="space-y-6">
             <p className="text-xl md:text-2xl text-[#2c2016] font-medium leading-relaxed">
-              Because the best ideas {"don't"} show up on schedule — they show up at{" "}
-              <span className="font-black text-[#c0392b]">2 AM</span>, three energy drinks in, when {"everyone's"} stopped overthinking and started building.
+              Because legendary ideas {"don't"} RSVP — they <span className="highlight-marker font-black">crash in at <span className="glow-red text-[#c0392b]">2 AM</span></span>, wired on caffeine & chaos, when you finally stop overthinking and <span className="underline-scribble font-black text-[#c0392b]">start shipping.</span>
             </p>
-            <p className="text-lg text-[#5a3e2b] leading-relaxed border-l-4 border-[#c0392b] pl-5 italic">
-              The sun falling {"isn't"} an ending.{" "}
-              <span className="font-bold not-italic text-[#c0392b]">{"It's"} when the real work starts.</span>
+            <p className="text-lg text-[#5a3e2b] leading-relaxed border-l-4 border-[#c0392b] pl-5 italic bg-gradient-to-r from-[#ede4d0]/60 to-transparent py-2 pr-3 rounded-r-xl">
+              The sun dipping {"isn't"} the finish line.{" "}
+              <span className="font-black not-italic text-[#c0392b] sparkle-text">{"It's"} the ignition.</span>{" "}
+              That amber hour when daydreamers clock out and builders light up.
             </p>
-            <p className="text-base text-[#7a5c3e] leading-relaxed bg-[#ede4d0]/80 p-5 rounded-2xl border border-[#2c2016]/10">
-              FallingSun is a 24-hour software hackathon for students under 18 who{"'"}d rather build than just talk about building. Over 24 hours, teams turn raw ideas into real, working projects — backed by mentors, proper infrastructure, and a room full of people who actually want to be there at 3 AM debugging.
+            <p className="text-base text-[#5a3e2b] leading-relaxed bg-[#ede4d0]/80 p-5 rounded-2xl border border-[#2c2016]/10 shadow-[4px_4px_0_rgba(44,32,22,0.06)]">
+              <span className="font-black text-[#2c2016]">FallingSun</span> is a <span className="bg-[#7ce24a] text-[#2c2016] px-1.5 py-0.5 rounded font-black text-sm">24-hour pressure-cooker</span> for under-18s who'd rather <span className="highlight-marker">ship than yap</span>. Turn raw sparks into working products — backed by pro mentors, battle-tested infra, and a room buzzing at 3 AM like a rave for debuggers.
             </p>
           </motion.div>
 
@@ -227,22 +228,28 @@ export default function Home() {
       {/* ── TAGLINE BAND ── */}
       <section className="py-20 bg-[#2c2016] relative overflow-hidden">
         <div className="absolute inset-0 opacity-10 bg-[url('/falling-sun-poster.png')] bg-cover bg-center mix-blend-screen" />
+        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#7ce24a]/5 to-transparent" />
         <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
-          <h3 className={`text-5xl md:text-7xl font-black text-[#f2ede4] tracking-tight leading-tight mb-4 ${markerFont.className}`}>
-            The sun falls.{" "}
-            <span className="text-[#7ce24a]">Something rises.</span>
+          <h3 className={`text-5xl md:text-7xl font-black tracking-tight leading-tight mb-4 ${markerFont.className}`}>
+            <span className="text-[#f2ede4]">The sun falls.</span>{" "}
+            <span className="flashy-gradient glow-green">Something rises.</span>
           </h3>
           <p className="text-[#c8b99a] text-lg max-w-2xl mx-auto leading-relaxed">
-            A 24-hour hackathon for students under 18 — built on the belief that the most remarkable things aren{"'"}t made in daylight hours.
+            A 24-hour <span className="text-[#7ce24a] font-black">ship-or-die</span> sprint for teens who build at night and <span className="underline-scribble text-[#f2ede4] font-bold">flex by sunrise</span> — because the best demos are born after dark.
           </p>
+          <div className="mt-6 flex flex-wrap justify-center gap-2 text-[10px] font-mono tracking-widest uppercase">
+            <span className="px-3 py-1 rounded-full bg-[#7ce24a] text-[#2c2016] font-black">Build After Dark</span>
+            <span className="px-3 py-1 rounded-full border border-[#f2ede4]/20 text-[#f2ede4]/70">Ship Before Sunrise</span>
+          </div>
         </div>
       </section>
 
       {/* ── HOW IT WORKS ── */}
       <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>How It <span className="text-[#c0392b]">Works</span></SectionTitle>
+          <SectionTitle accent>How It <span className="flashy-gradient">Works</span></SectionTitle>
         </motion.div>
+        <p className="text-[#7a5c3e] -mt-8 mb-10 max-w-xl">Four moves. Zero fluff. From spark to stage — <span className="font-black text-[#2c2016] highlight-marker">here's the playbook.</span></p>
 
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {processSteps.map((s, i) => (
@@ -252,15 +259,15 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-6 flex flex-col gap-3"
+              className="bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-6 flex flex-col gap-3 hover:bg-[#ede4d0] hover:border-[#c0392b]/30 hover:shadow-[4px_4px_0_rgba(44,32,22,0.1)] transition-all group"
             >
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center font-black text-sm shrink-0">
+                <div className="w-10 h-10 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center font-black text-sm shrink-0 group-hover:bg-[#c0392b] transition-colors">
                   {s.step}
                 </div>
-                <span className="text-[#c0392b]">{s.icon}</span>
+                <span className="text-[#c0392b] group-hover:scale-110 transition-transform">{s.icon}</span>
               </div>
-              <h4 className="font-black text-[#2c2016] text-lg">{s.title}</h4>
+              <h4 className="font-black text-[#2c2016] text-lg animated-underline self-start">{s.title}</h4>
               <p className="text-[#7a5c3e] text-sm leading-relaxed">{s.desc}</p>
             </motion.div>
           ))}
@@ -270,8 +277,9 @@ export default function Home() {
       {/* ── HOW TO QUALIFY ── */}
       <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>How to <span className="text-[#c0392b]">Qualify</span></SectionTitle>
+          <SectionTitle accent>How to <span className="text-[#c0392b] glow-red">Qualify</span></SectionTitle>
         </motion.div>
+        <p className="text-[#7a5c3e] -mt-8 mb-8 max-w-xl">No essays. No grades. Just <span className="font-black text-[#c0392b]">show up, lock in, ship hard.</span></p>
 
         <div className="grid md:grid-cols-2 gap-12 items-start">
           {/* Steps */}
@@ -283,9 +291,9 @@ export default function Home() {
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="qualify-step flex items-start gap-4 bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-5 cursor-default"
+                className="qualify-step flex items-start gap-4 bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-5 cursor-default group"
               >
-                <div className="w-12 h-12 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center shrink-0 font-black text-lg">
+                <div className="w-12 h-12 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center shrink-0 font-black text-lg group-hover:bg-[#c0392b] transition-colors">
                   {s.step}
                 </div>
                 <div>
@@ -310,13 +318,14 @@ export default function Home() {
             >
               <img src="/comic-stack.png" alt="Stack & Setup" className="w-full h-auto" />
             </motion.div>
-            <div className="bg-[#2c2016] text-[#f2ede4] rounded-2xl p-6 border-4 border-[#2c2016] shadow-[6px_6px_0_#c0392b] card-3d">
-              <p className="text-sm font-bold text-[#7ce24a] uppercase tracking-widest mb-3">Beginner Friendly</p>
-              <p className="text-lg font-medium leading-relaxed">
-                We are <span className="font-black text-[#7ce24a]">100% beginner friendly!</span> Follow along with our guides and ask the community for help.
+            <div className="bg-[#2c2016] text-[#f2ede4] rounded-2xl p-6 border-4 border-[#2c2016] shadow-[6px_6px_0_#c0392b] card-3d relative overflow-hidden">
+              <div className="absolute top-0 right-0 w-20 h-20 bg-[#7ce24a]/10 rounded-full blur-2xl" />
+              <p className="text-sm font-black text-[#7ce24a] uppercase tracking-widest mb-3 flex items-center gap-2">✦ Beginner Friendly ✦</p>
+              <p className="text-lg font-medium leading-relaxed relative">
+                We are <span className="font-black text-[#7ce24a] glow-green">100% beginner proof!</span> No gatekeeping — just guides, mentors, and a community that <span className="underline-scribble">has your back</span> at 2 AM.
               </p>
               <div className="mt-4 flex gap-3">
-                <Link href="#" className="inline-flex items-center gap-2 bg-[#7ce24a] text-[#2c2016] font-black px-4 py-2 rounded-lg text-sm hover:bg-[#6dd43d] transition-colors">
+                <Link href="#" className="inline-flex items-center gap-2 bg-[#7ce24a] text-[#2c2016] font-black px-4 py-2 rounded-lg text-sm hover:bg-[#6dd43d] transition-colors shadow-[3px_3px_0_rgba(0,0,0,0.2)]">
                   <MessageCircle className="w-4 h-4" /> Join WhatsApp
                 </Link>
               </div>
@@ -328,9 +337,9 @@ export default function Home() {
       {/* ── REWARDS ── */}
       <section className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>Good work <span className="text-[#c0392b]">glows.</span></SectionTitle>
+          <SectionTitle accent>Good work <span className="flashy-gradient">glows.</span></SectionTitle>
         </motion.div>
-        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10 max-w-xl">Swag, certificates, mentorship, and more — all the reasons to finish the thing.</p>
+        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10 max-w-xl">Not just applause — <span className="font-black text-[#2c2016] bg-[#7ce24a]/30 px-1.5 rounded">drip, proof, and plug-ins</span> that outlast the demo.</p>
 
         <div className="grid sm:grid-cols-3 gap-6">
           {rewards.map((r, i) => (
@@ -340,12 +349,12 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: i * 0.1 }}
               viewport={{ once: true }}
-              className="bg-[#ede4d0]/70 border-2 border-[#2c2016]/15 rounded-2xl p-8 flex flex-col items-center text-center gap-3 hover:border-[#c0392b]/40 transition-colors"
+              className="bg-[#ede4d0]/70 border-2 border-[#2c2016]/15 rounded-2xl p-8 flex flex-col items-center text-center gap-3 hover:border-[#c0392b]/40 hover:bg-[#ede4d0] hover:shadow-[4px_4px_0_rgba(44,32,22,0.08)] transition-all group"
             >
-              <div className="w-14 h-14 rounded-full bg-[#2c2016] text-[#7ce24a] flex items-center justify-center">
+              <div className="w-14 h-14 rounded-full bg-[#2c2016] text-[#7ce24a] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#c0392b] group-hover:text-[#f2ede4] transition-all">
                 {r.icon}
               </div>
-              <h4 className={`text-xl font-black text-[#2c2016] ${markerFont.className}`}>{r.title}</h4>
+              <h4 className={`text-xl font-black text-[#2c2016] ${markerFont.className} sparkle-text`}>{r.title}</h4>
               <p className="text-sm text-[#7a5c3e] leading-relaxed">{r.desc}</p>
             </motion.div>
           ))}
@@ -356,8 +365,8 @@ export default function Home() {
       <section className="py-16 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-xs font-black text-[#8b6340] uppercase tracking-[0.4em] mb-2">Powered By & Supported By</p>
-          <h3 className={`text-2xl font-black text-[#2c2016] mb-3 ${markerFont.className}`}>Powered by the community.</h3>
-          <p className="text-sm text-[#7a5c3e] max-w-xl mx-auto mb-10">Sponsors and partners help us keep this event free and open to every student who wants to build.</p>
+          <h3 className={`text-2xl font-black text-[#2c2016] mb-3 ${markerFont.className}`}>Fuel the fall. <span className="text-[#c0392b]">Power the rise.</span></h3>
+          <p className="text-sm text-[#7a5c3e] max-w-xl mx-auto mb-10">Our sponsors kill the paywall — <span className="font-black text-[#2c2016] highlight-marker">100% free</span> for every teen who wants to build. No tickets, just talent.</p>
           <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
             {sponsors.map((s, i) => (
               <motion.div key={i} whileHover={{ scale: 1.15, rotate: -3 }} transition={{ type: 'spring', stiffness: 300 }}>
@@ -366,8 +375,8 @@ export default function Home() {
             ))}
           </div>
           <div className="mt-10">
-            <a href="#contact" className="inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] font-bold px-6 py-3 rounded-xl border-2 border-[#2c2016] hover:bg-[#c0392b] hover:border-[#c0392b] transition-colors shadow-[4px_4px_0_rgba(44,32,22,0.3)]">
-              Contact Us to Sponsor →
+            <a href="#contact" className="inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] font-bold px-6 py-3 rounded-xl border-2 border-[#2c2016] hover:bg-[#c0392b] hover:border-[#c0392b] transition-colors shadow-[4px_4px_0_rgba(44,32,22,0.3)] group">
+              Back the Builders <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </div>
         </div>
@@ -376,8 +385,9 @@ export default function Home() {
       {/* ── SCHEDULE ── */}
       <section className="py-24 px-6 max-w-5xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>The <span className="text-[#c0392b]">24-Hour</span> Sprint</SectionTitle>
+          <SectionTitle accent>The <span className="flashy-gradient">24-Hour</span> Sprint</SectionTitle>
         </motion.div>
+        <p className="text-[#7a5c3e] -mt-8 mb-10 max-w-xl">Two days. One ship window. <span className="font-black text-[#c0392b]">Every minute counts.</span></p>
 
         <div className="grid md:grid-cols-2 gap-10">
           {/* Day 1 */}
@@ -385,22 +395,22 @@ export default function Home() {
             className="card-3d bg-[#ede4d0] border-2 border-[#2c2016]/20 rounded-2xl p-7 shadow-[6px_6px_0_rgba(44,32,22,0.12)]">
             <h3 className={`text-2xl font-black mb-7 flex items-center gap-3 text-[#2c2016] ${markerFont.className}`}>
               <span className="w-9 h-9 rounded-full bg-[#c0392b] text-white flex items-center justify-center text-base font-black">1</span>
-              Day One
+              Day One — <span className="text-[#c0392b]">Ignite</span>
             </h3>
             <div className="space-y-5">
               {[
-                { t: "09:00", a: "Participant Check-in", d: "ID verification · Registration", tag: "ADMIN" },
-                { t: "09:30", a: "Opening Ceremony + Rules", d: "Welcome · Rules · Judging", tag: "SYSTEM" },
-                { t: "10:00", a: "Workshops / Bootcamp", d: "Godot · GitHub · Quick tips", tag: "LEARN" },
-                { t: "11:15", a: "Idea Lock", d: "Choose track · Finalize idea", tag: "BUILD" },
-                { t: "12:00", a: "Build Sprint", d: "Start building · Prototype", tag: "BUILD" },
-                { t: "13:00", a: "Lunch Break", d: "Recharge & reset", tag: "PAUSE" },
-                { t: "13:45", a: "Build Sprint", d: "Code · Design · Test", tag: "BUILD" },
-                { t: "16:30", a: "Fun Activity", d: "Quick games · Team bonding", tag: "FUN" },
-                { t: "17:00", a: "Mentor Check-in", d: "Progress check · Feedback", tag: "CHECK" },
-                { t: "18:00", a: "Build Sprint", d: "Improve · Polish · Test", tag: "BUILD" },
-                { t: "19:30", a: "Day 1 Wrap-up", d: "Updates · Tomorrow's plan", tag: "ADMIN" },
-                { t: "20:00", a: "Day 1 Ends", d: "Rest up. Tomorrow you ship.", tag: "END" },
+                { t: "09:00", a: "Participant Check-in", d: "ID verification · Registration · Claim your corner", tag: "ADMIN" },
+                { t: "09:30", a: "Opening Ceremony + Rules", d: "Welcome · Rules · Judging tea ☕", tag: "SYSTEM" },
+                { t: "10:00", a: "Workshops / Bootcamp", d: "Godot · GitHub · Ship-hack speedruns", tag: "LEARN" },
+                { t: "11:15", a: "Idea Lock 🔒", d: "Choose track · Finalize idea — no backsies", tag: "BUILD" },
+                { t: "12:00", a: "Build Sprint", d: "Prototype mode: ON. Go wild.", tag: "BUILD" },
+                { t: "13:00", a: "Lunch Break", d: "Refuel. Touch grass. Plot comeback.", tag: "PAUSE" },
+                { t: "13:45", a: "Build Sprint", d: "Code · Design · Break · Fix · Repeat", tag: "BUILD" },
+                { t: "16:30", a: "Fun Activity", d: "Quick games · Energy spike · Memes IRL", tag: "FUN" },
+                { t: "17:00", a: "Mentor Check-in", d: "Feedback that actually helps you ship", tag: "CHECK" },
+                { t: "18:00", a: "Build Sprint", d: "The golden hour — polish till it shines", tag: "BUILD" },
+                { t: "19:30", a: "Day 1 Wrap-up", d: "Standup · Plan the night strike", tag: "ADMIN" },
+                { t: "20:00", a: "Day 1 Ends", d: "Rest. Recharge. Tomorrow you ship. 🌙", tag: "END" },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start group">
                   <span className="font-mono text-[#c0392b] font-bold text-sm w-12 shrink-0 pt-0.5">{item.t}</span>
@@ -421,20 +431,20 @@ export default function Home() {
             className="card-3d bg-[#ede4d0] border-2 border-[#2c2016]/20 rounded-2xl p-7 shadow-[6px_6px_0_rgba(44,32,22,0.12)]">
             <h3 className={`text-2xl font-black mb-7 flex items-center gap-3 text-[#2c2016] ${markerFont.className}`}>
               <span className="w-9 h-9 rounded-full bg-[#7ce24a] border-2 border-[#2c2016] text-[#2c2016] flex items-center justify-center text-base font-black">2</span>
-              Day Two
+              Day Two — <span className="text-[#c0392b]">Ship</span>
             </h3>
             <div className="space-y-5">
               {[
-                { t: "08:00", a: "Resume Builds", d: "Back to building", tag: "START", hot: false },
-                { t: "09:00", a: "Final Development", d: "Final sprint · Testing · Polish", tag: "BUILD", hot: false },
-                { t: "11:00", a: "Submission Opens", d: "Upload project & required files", tag: "SYSTEM", hot: false },
-                { t: "12:30", a: "Lunch + Demo Prep", d: "Eat · Prepare your presentation", tag: "PAUSE", hot: false },
-                { t: "14:00", a: "FINAL SUBMISSION DEADLINE", d: "Hard cutoff — no late submissions", tag: "DEADLINE", hot: true },
-                { t: "14:00", a: "Presentations & Demos", d: "2–3 minutes per team", tag: "SYSTEM", hot: false },
-                { t: "16:30", a: "Project Showcase", d: "Explore builds · Meet teams", tag: "FUN", hot: false },
-                { t: "17:30", a: "Student Voting", d: "Fair community voting", tag: "VOTE", hot: false },
-                { t: "18:00", a: "Results + Closing", d: "Winners · Special mentions", tag: "ADMIN", hot: false },
-                { t: "19:00", a: "Closing Ceremony", d: "Awards · Photos · Finale", tag: "CLOSE", hot: false },
+                { t: "08:00", a: "Resume Builds", d: "Coffee. Code. Conquer.", tag: "START", hot: false },
+                { t: "09:00", a: "Final Development", d: "Kill bugs · Add shine · Test like mad", tag: "BUILD", hot: false },
+                { t: "11:00", a: "Submission Opens", d: "Upload build + docs + demo link", tag: "SYSTEM", hot: false },
+                { t: "12:30", a: "Lunch + Demo Prep", d: "Eat · Breathe · Rehearse your flex", tag: "PAUSE", hot: false },
+                { t: "14:00", a: "FINAL SUBMISSION DEADLINE", d: "Hard cutoff — no late merges, no mercy ⏰", tag: "DEADLINE", hot: true },
+                { t: "14:00", a: "Presentations & Demos", d: "3 min to own the room — make it count", tag: "SYSTEM", hot: false },
+                { t: "16:30", a: "Project Showcase", d: "Wander. Play. Steal ideas (with love).", tag: "FUN", hot: false },
+                { t: "17:30", a: "Student Voting", d: "Peer power — vote for what moved you", tag: "VOTE", hot: false },
+                { t: "18:00", a: "Results + Closing", d: "Winners, shouts & standing ovations", tag: "ADMIN", hot: false },
+                { t: "19:00", a: "Closing Ceremony", d: "Awards · Photos · The afterglow ✨", tag: "CLOSE", hot: false },
               ].map((item, i) => (
                 <div key={i} className={`flex gap-4 items-start group ${item.hot ? 'bg-[#c0392b]/10 -mx-3 px-3 py-2 rounded-lg border border-[#c0392b]/30' : ''}`}>
                   <span className={`font-mono font-bold text-sm w-12 shrink-0 pt-0.5 ${item.hot ? 'text-[#c0392b] font-black' : 'text-[#c0392b]'}`}>{item.t}</span>
@@ -455,13 +465,13 @@ export default function Home() {
       {/* ── ORGANIZERS ── */}
       <section className="py-20 bg-[#2c2016] overflow-hidden">
         <div className="text-center mb-12 px-6">
-          <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-2">Meet The Builders</p>
+          <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-2">Meet The Builders ✦</p>
           <h2 className={`text-4xl md:text-5xl font-black text-[#f2ede4] ${markerFont.className}`}>
-            Friendly eyes. <span className="text-[#7ce24a]">Big questions.</span>
+            Friendly eyes. <span className="text-[#7ce24a] glow-green">Savage talent.</span>
           </h2>
-          <p className="text-[#c8b99a] mt-3">The people making FallingSun happen.</p>
+          <p className="text-[#c8b99a] mt-3">The crew turning moonlight into <span className="text-[#7ce24a] font-bold">momentum.</span> <span className="hidden sm:inline text-[#f2ede4]/50">← drag to meet all →</span></p>
         </div>
-        <div className="w-full h-[580px]">
+        <div className="w-full h-[520px]">
           <WheelCarousel
             items={organizers}
             mode="dark"
@@ -481,14 +491,14 @@ export default function Home() {
         </div>
 
         <div className="max-w-3xl mx-auto mt-2 px-6">
-          <p className="text-center text-xs font-black text-[#7ce24a]/70 uppercase tracking-[0.3em] mb-6">Mentors</p>
+          <p className="text-center text-xs font-black text-[#7ce24a]/70 uppercase tracking-[0.3em] mb-6">Mentors — Your Secret Weapons</p>
           <div className="flex flex-wrap justify-center gap-6">
             {mentors.map((m, i) => (
-              <div key={i} className="flex items-center gap-3 bg-[#1a120b]/60 border border-[#f2ede4]/10 rounded-full pr-5 pl-2 py-2">
+              <div key={i} className="flex items-center gap-3 bg-[#1a120b]/60 border border-[#f2ede4]/10 rounded-full pr-5 pl-2 py-2 hover:border-[#7ce24a]/40 hover:bg-[#1a120b] transition-colors">
                 <img src={m.image} alt={m.name} className="w-10 h-10 rounded-full object-cover" />
                 <div className="text-left">
                   <p className="text-sm font-bold text-[#f2ede4]">{m.name}</p>
-                  <p className="text-[10px] text-[#7ce24a] uppercase tracking-widest font-bold">{m.role}</p>
+                  <p className="text-[10px] text-[#7ce24a] uppercase tracking-widest font-bold">{m.role} ✦ Ready to help</p>
                 </div>
               </div>
             ))}
@@ -499,9 +509,9 @@ export default function Home() {
       {/* ── RULES ── */}
       <section id="rules" className="py-24 px-6 max-w-4xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>Play <span className="text-[#c0392b]">fair.</span></SectionTitle>
+          <SectionTitle accent>Play <span className="flashy-gradient">fair.</span> Ship <span className="text-[#7ce24a]">proud.</span></SectionTitle>
         </motion.div>
-        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10">Keep it fun, keep it original, keep it safe.</p>
+        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10">Keep it real, keep it original, <span className="font-black text-[#2c2016] highlight-marker">keep the vibe clean.</span></p>
 
         <ol className="grid sm:grid-cols-2 gap-4 list-none">
           {rules.map((r, i) => (
@@ -511,9 +521,9 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: i * 0.05 }}
               viewport={{ once: true }}
-              className="flex gap-3 items-start bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-4"
+              className="flex gap-3 items-start bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-4 hover:bg-[#ede4d0] hover:border-[#c0392b]/20 hover:shadow-[3px_3px_0_rgba(44,32,22,0.08)] transition-all"
             >
-              <span className="font-mono font-black text-[#c0392b] shrink-0 pt-0.5">{String(i + 1).padStart(2, "0")}</span>
+              <span className="font-mono font-black text-[#c0392b] shrink-0 pt-0.5 bg-[#c0392b]/10 w-7 h-7 flex items-center justify-center rounded-lg text-xs">{String(i + 1).padStart(2, "0")}</span>
               <span className="text-sm text-[#5a3e2b] leading-relaxed">{r}</span>
             </motion.li>
           ))}
@@ -523,15 +533,16 @@ export default function Home() {
       {/* ── FAQ ── */}
       <section id="faq" className="py-24 px-6 max-w-3xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>FAQ</SectionTitle>
+          <SectionTitle accent>Got <span className="flashy-gradient">Questions?</span></SectionTitle>
         </motion.div>
+        <p className="text-[#7a5c3e] -mt-8 mb-8">We’ve got answers — no boring legalese, just straight talk.</p>
         <Accordion type="single" collapsible className="w-full space-y-3">
           {[
-            { q: "Who can participate?", a: "Any student under the age of 18 with a passion for building. Whether you're a seasoned coder or just starting out — you're welcome here." },
-            { q: "Code of Conduct", a: "Be respectful. Harassment of any kind will not be tolerated. Help each other, share knowledge, and build great things together." },
-            { q: "What if I don't have a team?", a: "Don't worry! We'll have team-building sessions at the start so you can find other awesome builders to work with." },
-            { q: "What should I bring?", a: "Laptop, charger, student ID, and your energy! We'll provide food, internet, and a workspace." },
-            { q: "Is it free?", a: "Yes! Falling Sun is completely free to participate in. We handle the infrastructure so you focus on building." },
+            { q: "Who can actually pull up?", a: "Any student under 18 who’s down to build. First-timer or serial shipper — if you’ve got curiosity and a laptop, you’re in. Under-18 only, strictly 13-18." },
+            { q: "What’s the vibe? Code of Conduct?", a: "Respect is non-negotiable. No harassment, no gatekeeping, no jerks. Lift each other up, share the sauce, and make something unforgettable — together." },
+            { q: "No team? No problem?", a: "Absolutely not! We run live team-match at kickoff. Walk in solo, walk out with a crew. Some of the best builds started with a shy “wanna team?”" },
+            { q: "What do I actually need to bring?", a: "Laptop + charger + student ID + that weird idea you’ve been saving. We’ve got WiFi, food, power, and mentors for the rest. Sleep optional." },
+            { q: "Real talk — is it actually free?", a: "100% free. Zero catch. No ticket, no hidden fees. We handle food & infra so you can focus on flexing your build. Just bring parent consent." },
           ].map((item, i) => (
             <AccordionItem key={i} value={`item-${i}`} className="bg-[#ede4d0]/80 border-2 border-[#2c2016]/15 rounded-xl px-5 data-[state=open]:border-[#c0392b]/40 data-[state=open]:bg-[#ede4d0] transition-colors">
               <AccordionTrigger className="text-[#2c2016] font-bold text-base hover:text-[#c0392b] hover:no-underline">{item.q}</AccordionTrigger>
@@ -544,29 +555,30 @@ export default function Home() {
       {/* ── CTA FOOTER ── */}
       <footer id="contact" className="py-24 px-6 bg-[#2c2016] relative overflow-hidden">
         <div className="absolute inset-0 opacity-5 bg-[url('/falling-sun-poster.png')] bg-cover bg-center" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#7ce24a]/5 rounded-full blur-[100px] pointer-events-none" />
         <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
-          <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-4">The Clock Is Ticking</p>
+          <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-4 animate-pulse">The Horizon Is Burning ✦</p>
           <h2 className={`text-5xl md:text-7xl font-black text-[#f2ede4] mb-3 tracking-tight ${markerFont.className}`}>
-            We Are Ready.
+            We Are <span className="text-[#7ce24a] glow-green">Ready.</span>
           </h2>
-          <h2 className={`text-5xl md:text-7xl font-black text-[#c0392b] mb-8 tracking-tight ${markerFont.className}`}>
+          <h2 className={`text-5xl md:text-7xl font-black text-[#c0392b] mb-8 tracking-tight ${markerFont.className} glow-red`}>
             Are You?
           </h2>
-          <p className="text-xl text-[#c8b99a] mb-10 max-w-lg">Contact us for any kind of problem, question, or sponsorship opportunity.</p>
+          <p className="text-xl text-[#c8b99a] mb-10 max-w-lg">Stuck? Hyped? Wanna <span className="text-[#7ce24a] font-bold">sponsor the chaos</span>? Hit us — we reply faster than your build compiles.</p>
           <div className="flex flex-wrap justify-center gap-4">
             <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
-              className="inline-flex items-center gap-3 bg-[#7ce24a] text-[#2c2016] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#6dd43d] transition-all hover:scale-105 shadow-[4px_4px_0_rgba(44,32,22,0.4)]">
-              <MessageCircle className="w-5 h-5" /> Join WhatsApp Community
+              className="inline-flex items-center gap-3 bg-[#7ce24a] text-[#2c2016] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#6dd43d] transition-all hover:scale-105 shadow-[4px_4px_0_rgba(44,32,22,0.4)] group badge-shine relative overflow-hidden">
+              <span className="relative z-10 flex items-center gap-3"><MessageCircle className="w-5 h-5" /> Join WhatsApp Community</span>
             </a>
             <a href="mailto:hello@fallingsun.dev"
-              className="inline-flex items-center gap-3 bg-transparent text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#f2ede4]/30 hover:border-[#f2ede4] transition-all hover:scale-105">
-              Email Us →
+              className="inline-flex items-center gap-3 bg-transparent text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#f2ede4]/30 hover:border-[#f2ede4] hover:bg-[#f2ede4]/10 transition-all hover:scale-105">
+              Email Us <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </div>
 
           <div className="mt-14 pt-8 border-t border-[#f2ede4]/10 w-full flex flex-col items-center gap-5">
             <p className={`text-lg text-[#f2ede4] ${markerFont.className}`}>
-              FALLINGSUN — Build something worth showing.
+              FALLINGSUN — <span className="text-[#7ce24a]">Build after dark.</span> Flex by sunrise.
             </p>
             <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-widest text-[#c8b99a]">
               <a href="#contact" className="hover:text-[#7ce24a] transition-colors">Registration</a>
