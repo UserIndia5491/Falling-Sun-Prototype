@@ -3,10 +3,8 @@
 import React from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
-import { Fredoka, DM_Sans } from "next/font/google"
 import {
  Lock,
- ChevronDown,
  CheckCircle2,
  MessageCircle,
  Star,
@@ -19,13 +17,10 @@ import {
  Rocket,
  Gift,
  Award,
- GitBranch as Github,
 } from "lucide-react"
 import { WheelCarousel } from "@/components/ui/wheel-carousel"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
-const fredoka = Fredoka({ subsets: ['latin'], weight: ['400','500','600','700'] })
-const dmSans = DM_Sans({ subsets: ['latin'], weight: ['400','500','700'] })
 
 const organizers = [
  { label: "Tanmay", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80", imageAlt: "Tanmay" },
@@ -41,8 +36,6 @@ const mentors = [
  { name: "Aniket Gabba", role: "Mentor", image: "https://api.dicebear.com/7.x/initials/svg?seed=Aniket+Gabba&backgroundColor=8b6340" },
  { name: "Anand", role: "Mentor", image: "https://api.dicebear.com/7.x/initials/svg?seed=Anand&backgroundColor=8b6340" },
 ]
-
-const sponsorsRevealed = false
 
 const heroStats = ["24 HOURS (12+12)", "100% FREE", "UNDER 18"]
 
@@ -228,561 +221,156 @@ const codeOfConduct = [
   },
 ]
 
-function SectionTitle({ children, accent }: { children: React.ReactNode, accent?: boolean }) {
- return (
- <div className="mb-12 group">
- <h2 className={`text-4xl md:text-5xl font-black tracking-tight text-[#2c2016] leading-tight ${fredoka.className}`}>
- {children}
- </h2>
- {accent && <div className="mt-3 h-1.5 w-16 rounded-full bg-[#c0392b] group-hover:w-28 transition-all duration-500 ease-[cubic-bezier(0.34,1.56,0.64,1)] shadow-[0_0_10px_rgba(192,57,43,0.4)]" />}
- </div>
- )
+function SectionTitle({ index, children, light = false }: { index: string, children: React.ReactNode, light?: boolean }) {
+  return (
+    <div className="mb-10 flex items-start gap-4">
+      <span className={`font-mono text-xs tracking-[0.2em] pt-2 ${light ? "text-[#f5f1e8]/50" : "text-[#d90429]"}`}>{index}</span>
+      <div>
+        <h2 className={`text-4xl md:text-6xl font-black tracking-[-0.06em] leading-[0.92] uppercase ${light ? "text-[#f5f1e8]" : "text-[#171717]"}`}>{children}</h2>
+        <div className={`mt-5 h-2 w-20 ${light ? "bg-[#d90429]" : "bg-[#d90429]"}`} />
+      </div>
+    </div>
+  )
 }
 
+function LockedPanel({ kind }: { kind: "sponsors" | "register" }) {
+  const sponsors = kind === "sponsors"
+  return (
+    <div className="locked-panel relative overflow-hidden border-[3px] border-[#171717] bg-[#f5f1e8] p-7 md:p-10 shadow-[8px_8px_0_#171717]">
+      <div className="chain chain-left" aria-hidden="true">⛓</div>
+      <div className="chain chain-right" aria-hidden="true">⛓</div>
+      <div className="relative z-10 flex flex-col items-center text-center">
+        <div className="mb-5 flex h-16 w-16 items-center justify-center border-[3px] border-[#171717] bg-[#f4d900] shadow-[4px_4px_0_#d90429]">
+          <Lock className="h-8 w-8 text-[#171717]" strokeWidth={2.5} />
+        </div>
+        <p className="font-mono text-[10px] font-bold tracking-[0.3em] text-[#d90429]">STATUS // LOCKED</p>
+        <h3 className="mt-3 text-3xl font-black uppercase tracking-[-0.05em] text-[#171717] md:text-5xl">
+          {sponsors ? "Sponsors" : "Registration"}
+        </h3>
+        <p className="mt-3 max-w-md font-mono text-sm leading-relaxed text-[#56524c]">
+          {sponsors ? "Partners are being secured. The board stays sealed until the full roster is ready." : "The form is not open yet. Watch this space for the official registration drop."}
+        </p>
+        <span className="mt-7 border-2 border-[#171717] bg-[#d90429] px-4 py-2 font-mono text-xs font-bold tracking-[0.16em] text-[#f5f1e8]">TO BE REVEALED LATER</span>
+      </div>
+    </div>
+  )
+}
+
+const schedule = [
+  { day: "DAY 01", title: "IGNITE", items: [
+    ["09:00", "Participant Check-in", "ID verification · Registration · Claim your corner", "ADMIN"],
+    ["09:30", "Opening Ceremony + Rules", "Welcome · Rules · Judging tea", "SYSTEM"],
+    ["10:00", "Workshops / Bootcamp", "Godot · GitHub · Ship-hack speedruns", "LEARN"],
+    ["11:15", "Idea Lock", "Choose track · Finalize idea — no backsies", "BUILD"],
+    ["12:00", "Build Sprint", "Prototype mode: ON. Go wild.", "BUILD"],
+    ["13:00", "Lunch Break", "Refuel. Touch grass. Plot comeback.", "PAUSE"],
+    ["13:45", "Build Sprint", "Code · Design · Break · Fix · Repeat", "BUILD"],
+    ["16:30", "Fun Activity", "Quick games · Energy spike · Memes IRL", "FUN"],
+    ["17:00", "Mentor Check-in", "Feedback that actually helps you ship", "CHECK"],
+    ["18:00", "Build Sprint", "The golden hour — polish till it shines", "BUILD"],
+    ["19:30", "Day 1 Wrap-up", "Standup · Plan the night strike", "ADMIN"],
+    ["20:00", "Day 1 Ends", "Rest. Recharge. Tomorrow you ship.", "END"],
+  ]},
+  { day: "DAY 02", title: "SHIP", items: [
+    ["08:00", "Resume Builds", "Coffee. Code. Conquer.", "START"],
+    ["09:00", "Final Development", "Kill bugs · Add shine · Test like mad", "BUILD"],
+    ["11:00", "Submission Opens", "Upload build + docs + demo link", "SYSTEM"],
+    ["12:30", "Lunch + Demo Prep", "Eat · Breathe · Rehearse your flex", "PAUSE"],
+    ["14:00", "FINAL SUBMISSION DEADLINE", "Hard cutoff — no late merges, no mercy", "DEADLINE"],
+    ["14:00", "Presentations & Demos", "3 min to own the room — make it count", "SYSTEM"],
+    ["16:30", "Project Showcase", "Wander. Play. Steal ideas (with love).", "FUN"],
+    ["17:30", "Student Voting", "Peer power — vote for what moved you", "VOTE"],
+    ["18:00", "Results + Closing", "Winners, shouts & standing ovations", "ADMIN"],
+    ["19:00", "Closing Ceremony", "Awards · Photos · The afterglow", "CLOSE"],
+  ]},
+] as const
+
+const faq = [
+  ["Who can actually pull up?", "Any student under 18 who’s down to build. First-timer or serial shipper — if you’ve got curiosity and a laptop, you’re in. Under-18 only, strictly 13-18."],
+  ["What’s the vibe? Code of Conduct?", "Respect is non-negotiable. No harassment, no gatekeeping, no jerks. Lift each other up, share the sauce, and make something unforgettable — together."],
+  ["No team? No problem?", "Absolutely not! We run live team-match at kickoff. Walk in solo, walk out with a crew. Some of the best builds started with a shy “wanna team?”"],
+  ["What do I actually need to bring?", "Laptop + charger + student ID + that weird idea you’ve been saving. We’ve got WiFi, food, power, and mentors for the rest. Sleep optional."],
+  ["Real talk — is it actually free?", "100% free. Zero catch. No ticket, no hidden fees. We handle food & infra so you can focus on flexing your build. Just bring parent consent."],
+] as const
+
 export default function Home() {
- const { scrollY } = useScroll()
- const heroOpacity = useTransform(scrollY, [0, 400], [1, 0])
- const heroY = useTransform(scrollY, [0, 400], [0, -80])
- const posterScale = useTransform(scrollY, [0, 500], [1, 1.08])
+  const { scrollY } = useScroll()
+  const heroY = useTransform(scrollY, [0, 550], [0, -70])
 
   return (
-  <main className={`min-h-screen relative z-10 ${dmSans.className}`} style={{ background: 'linear-gradient(160deg, #f7f1e3 0%, #ede4d0 40%, #e8dcc8 100%)' }}>
+    <main className="brutalist-page min-h-screen">
+      <header className="site-header">
+        <a href="#top" className="brand-mark" aria-label="Falling Sun home"><span>F</span><span>/</span><span>S</span></a>
+        <nav className="hidden items-center gap-7 font-mono text-[10px] font-bold uppercase tracking-[0.18em] md:flex">
+          <a href="#about">About</a><a href="#playbook">Playbook</a><a href="#schedule">Schedule</a><a href="#rules">Rules</a>
+        </nav>
+        <div className="header-lock"><Lock className="h-3.5 w-3.5" /> REGISTER // LOCKED</div>
+      </header>
 
- {/* ── Sidebar widgets ── */}
- <div className="fixed right-5 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-3">
- <div className="bg-[#ede4d0] border-2 border-[#2c2016]/30 p-3 rounded-xl flex flex-col items-center gap-2 shadow-[4px_4px_0_rgba(44,32,22,0.15)] hover:shadow-[6px_6px_0_rgba(44,32,22,0.2)] transition-shadow">
- <span className="text-[9px] font-bold text-[#8b6340] uppercase tracking-widest text-center">Register</span>
- <div className="w-10 h-10 bg-[#ddd0b8] rounded-full flex items-center justify-center border border-[#2c2016]/20">
- <Lock className="w-4 h-4 text-[#8b6340]" />
- </div>
- <span className="text-[9px] font-bold text-[#8b6340] uppercase">Locked</span>
- </div>
- <div className="bg-[#ede4d0] border-2 border-[#2c2016]/30 p-3 rounded-xl flex flex-col items-center gap-2 shadow-[4px_4px_0_rgba(44,32,22,0.15)] hover:shadow-[6px_6px_0_rgba(44,32,22,0.2)] transition-shadow">
- <span className="text-[9px] font-bold text-[#8b6340] uppercase tracking-widest text-center">Time Left</span>
- <div className="font-black text-lg text-[#2c2016]/40 tracking-tighter">--:--</div>
- <span className="text-[9px] font-bold text-[#8b6340] uppercase flex items-center gap-1"><Lock className="w-2.5 h-2.5" />TBD</span>
- </div>
- </div>
-
- {/* ── HERO ── */}
- <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
- {/* Background: full-screen mp4 video */}
- <motion.div className="absolute inset-0 z-0" style={{ scale: posterScale }}>
- <video autoPlay muted loop playsInline className="w-full h-full object-cover">
- <source src="/Animate_pixel_art_sunset_scene_202608251027_gwr_video_mvp.mp4" type="video/mp4" />
- </video>
- <div
- aria-hidden="true"
- className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] aspect-square rounded-full blur-[100px] opacity-20 pointer-events-none"
- style={{ background: 'radial-gradient(circle, #7ce24a 0%, transparent 70%)' }}
- />
- {/* Soft overlay for text readability */}
- <div className="absolute inset-0 bg-gradient-to-b from-[#f2ede4]/30 via-[#f2ede4]/40 to-[#f2ede4]" />
- <div className="absolute inset-0 bg-[#f2ede4]/10" />
- </motion.div>
-
- <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative z-10 flex flex-col items-center text-center px-4">
-
- {/* 3D pop title */}
- <div className="hero-title cursor-pointer mb-4">
- <div className="hero-title-inner">
- <h1 className={`flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8 text-[4rem] md:text-[9rem] uppercase select-none ${fredoka.className}`}>
- <span className="bg-[#7ce24a] text-[#c0392b] px-6 py-1 md:px-10 md:py-2 border-[5px] md:border-[7px] border-[#2c2016] -rotate-3 shadow-[-5px_5px_0_#2c2016] rounded-sm inline-block relative overflow-hidden badge-shine">
- FALLING
- </span>
- <span className="text-[#2c2016] rotate-2 drop-shadow-[4px_4px_0_rgba(44,32,22,0.3)]">
- SUN
- </span>
- </h1>
- </div>
- </div>
-
- <p className="text-[#5a3e2b] font-mono tracking-[0.3em] uppercase text-sm md:text-base font-semibold bg-[#ede4d0]/70 px-6 py-2 rounded-full border border-[#2c2016]/20 backdrop-blur-sm">
- Under-18 · 24-Hour · <span className="text-[#c0392b] font-black">Ship-Or-Die</span> Hackathon
- </p>
-
- <div className="flex flex-wrap items-center justify-center gap-2 mt-5 max-w-md">
- {heroStats.map((stat, i) => (
- <span key={i} className="text-[10px] md:text-xs font-black tracking-widest uppercase bg-[#2c2016] text-[#f2ede4] px-3 py-1.5 rounded-full badge-shine relative overflow-hidden">
- {stat}
- </span>
- ))}
- </div>
-
- <a
- href="#contact"
- className="mt-7 inline-flex items-center gap-2 bg-[#c0392b] text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#a53125] hover:scale-105 transition-all shadow-[4px_4px_0_rgba(44,32,22,0.4)] uppercase tracking-wide text-sm group badge-shine relative overflow-hidden"
- >
- <span className="relative z-10 flex items-center gap-2">Ignite Your Team <span aria-hidden="true" className="group-hover:translate-x-1 transition-transform">→</span></span>
- </a>
-          <p className={`mt-3 text-[11px] font-mono text-[#8b6340] tracking-widest uppercase opacity-70 ${dmSans.className}`}>Limited spots · first-come, first-ship ✦</p>
- </motion.div>
-
- <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
- <ChevronDown className="w-8 h-8 text-[#8b6340]" />
- </div>
- </section>
-
- {/* ── WHY FALLING SUN ── */}
- <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto relative">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>Why <span className="text-[#c0392b]">Falling Sun?</span></SectionTitle>
- </motion.div>
-
- <div className="grid md:grid-cols-2 gap-12 items-start">
- {/* Text */}
- <motion.div initial={{ opacity: 0, x: -30 }} whileInView={{ opacity: 1, x: 0 }} transition={{ duration: 0.7, delay: 0.1 }} viewport={{ once: true }} className="space-y-6">
- <p className="text-xl md:text-2xl text-[#2c2016] font-medium leading-relaxed">
- Because legendary ideas {"don't"} RSVP — they <span className=" font-black">crash in at <span className=" text-[#c0392b]">2 AM</span></span>, wired on caffeine & chaos, when you finally stop overthinking and <span className="underline-scribble font-black text-[#c0392b]">start shipping.</span>
- </p>
- <p className="text-lg text-[#5a3e2b] leading-relaxed border-l-4 border-[#c0392b] pl-5 italic bg-gradient-to-r from-[#ede4d0]/60 to-transparent py-2 pr-3 rounded-r-xl">
- The sun dipping {"isn't"} the finish line.{" "}
- <span className="font-black not-italic text-[#c0392b]">{"It's"} the ignition.</span>{" "}
- That amber hour when daydreamers clock out and builders light up.
- </p>
- <p className="text-base text-[#5a3e2b] leading-relaxed bg-[#ede4d0]/80 p-5 rounded-2xl border border-[#2c2016]/10 shadow-[4px_4px_0_rgba(44,32,22,0.06)]">
- <span className="font-black text-[#2c2016]">FallingSun</span> is a <span className="bg-[#7ce24a] text-[#2c2016] px-1.5 py-0.5 rounded font-black text-sm">24-hour pressure-cooker</span> for under-18s who'd rather <span className="">ship than yap</span>. Turn raw sparks into working products — backed by pro mentors, battle-tested infra, and a room buzzing at 3 AM like a rave for debuggers.
- </p>
- </motion.div>
-
- {/* Comic panels stacked */}
- <div className="flex flex-col gap-6">
- <motion.div
- initial={{ opacity: 0, rotate: -3, y: 20 }}
- whileInView={{ opacity: 1, rotate: -2, y: 0 }}
- transition={{ duration: 0.6, delay: 0.2 }}
- viewport={{ once: true }}
- className="comic-panel rounded-xl overflow-hidden border-4 border-[#2c2016] shadow-[6px_6px_0_#2c2016] -rotate-2"
- >
- <img src="/comic-idea.png" alt="Hour 1: The Idea Phase" className="w-full h-auto" />
- </motion.div>
- <motion.div
- initial={{ opacity: 0, rotate: 3, y: 20 }}
- whileInView={{ opacity: 1, rotate: 2, y: 0 }}
- transition={{ duration: 0.6, delay: 0.35 }}
- viewport={{ once: true }}
- className="comic-panel rounded-xl overflow-hidden border-4 border-[#2c2016] shadow-[6px_6px_0_#2c2016] rotate-2"
- >
- <img src="/comic-stack.png" alt="Hour 6: Stack & Initial Setup" className="w-full h-auto" />
- </motion.div>
- </div>
- </div>
- </section>
-
- {/* ── TAGLINE BAND ── */}
- <section className="py-20 bg-[#2c2016] relative overflow-hidden">
- <div className="absolute inset-0 opacity-10 bg-[url('/falling-sun-poster.png')] bg-cover bg-center mix-blend-screen" />
- <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#7ce24a]/5 to-transparent" />
- <div className="max-w-4xl mx-auto px-6 text-center relative z-10">
- <h3 className={`text-5xl md:text-7xl font-black tracking-tight leading-tight mb-4 ${fredoka.className}`}>
- <span className="text-[#f2ede4]">The sun falls.</span>{" "}
- <span className="text-[#c0392b]">Something rises.</span>
- </h3>
- <p className="text-[#c8b99a] text-lg max-w-2xl mx-auto leading-relaxed">
- A 24-hour <span className="text-[#7ce24a] font-black">ship-or-die</span> sprint for teens who build at night and <span className="underline-scribble text-[#f2ede4] font-bold">flex by sunrise</span> — because the best demos are born after dark.
- </p>
- <div className="mt-6 flex flex-wrap justify-center gap-2 text-[10px] font-mono tracking-widest uppercase">
- <span className="px-3 py-1 rounded-full bg-[#7ce24a] text-[#2c2016] font-black">Build After Dark</span>
- <span className="px-3 py-1 rounded-full border border-[#f2ede4]/20 text-[#f2ede4]/70">Ship Before Sunrise</span>
- </div>
- </div>
- </section>
-
- {/* ── HOW IT WORKS ── */}
- <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>How It <span className="text-[#c0392b]">Works</span></SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] -mt-8 mb-10 max-w-xl">Four moves. Zero fluff. From spark to stage — <span className="font-black text-[#2c2016]">here's the playbook.</span></p>
-
- <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
- {processSteps.map((s, i) => (
- <motion.div
- key={i}
- initial={{ opacity: 0, y: 20 }}
- whileInView={{ opacity: 1, y: 0 }}
- transition={{ duration: 0.5, delay: i * 0.1 }}
- viewport={{ once: true }}
- className="bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-6 flex flex-col gap-3 hover:bg-[#ede4d0] hover:border-[#c0392b]/30 hover:shadow-[4px_4px_0_rgba(44,32,22,0.1)] transition-all group"
- >
- <div className="flex items-center gap-3">
- <div className="w-10 h-10 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center font-black text-sm shrink-0 group-hover:bg-[#c0392b] transition-colors">
- {s.step}
- </div>
- <span className="text-[#c0392b] group-hover:scale-110 transition-transform">{s.icon}</span>
- </div>
- <h4 className="font-black text-[#2c2016] text-lg animated-underline self-start">{s.title}</h4>
- <p className="text-[#7a5c3e] text-sm leading-relaxed">{s.desc}</p>
- </motion.div>
- ))}
- </div>
- </section>
-
- {/* ── HOW TO QUALIFY ── */}
- <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>How to <span className="text-[#c0392b]">Qualify</span></SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] -mt-8 mb-8 max-w-xl">No essays. No grades. Just <span className="font-black text-[#c0392b]">show up, lock in, ship hard.</span></p>
-
- <div className="grid md:grid-cols-2 gap-12 items-start">
- {/* Steps */}
- <div className="space-y-4">
- {qualifySteps.map((s, i) => (
- <motion.div
- key={i}
- initial={{ opacity: 0, x: -20 }}
- whileInView={{ opacity: 1, x: 0 }}
- transition={{ duration: 0.5, delay: i * 0.1 }}
- viewport={{ once: true }}
- className="qualify-step flex items-start gap-4 bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-5 cursor-default group"
- >
- <div className="w-12 h-12 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center shrink-0 font-black text-lg group-hover:bg-[#c0392b] transition-colors">
- {s.step}
- </div>
- <div>
- <div className="flex items-center gap-2 mb-1">
- <span className="text-[#c0392b]">{s.icon}</span>
- <h4 className="font-black text-[#2c2016] text-lg">{s.title}</h4>
- </div>
- <p className="text-[#7a5c3e] text-sm leading-relaxed">{s.desc}</p>
- </div>
- </motion.div>
- ))}
- </div>
-
- {/* Comic panels */}
- <div className="flex flex-col gap-6">
- <motion.div
- initial={{ opacity: 0, rotate: 2, y: 20 }}
- whileInView={{ opacity: 1, rotate: 1, y: 0 }}
- transition={{ duration: 0.6, delay: 0.2 }}
- viewport={{ once: true }}
- className="comic-panel rounded-xl overflow-hidden border-4 border-[#2c2016] shadow-[6px_6px_0_#2c2016] rotate-1"
- >
- <img src="/comic-stack.png" alt="Stack & Setup" className="w-full h-auto" />
- </motion.div>
- <div className="bg-[#2c2016] text-[#f2ede4] rounded-2xl p-6 border-4 border-[#2c2016] shadow-[6px_6px_0_#c0392b] card-3d relative overflow-hidden">
- <div className="absolute top-0 right-0 w-20 h-20 bg-[#7ce24a]/10 rounded-full blur-2xl" />
- <p className="text-sm font-black text-[#7ce24a] uppercase tracking-widest mb-3 flex items-center gap-2">✦ Beginner Friendly ✦</p>
- <p className="text-lg font-medium leading-relaxed relative">
- We are <span className="font-black text-[#7ce24a]">100% beginner proof!</span> No gatekeeping — just guides, mentors, and a community that <span className="underline-scribble">has your back</span> at 2 AM.
- </p>
- <div className="mt-4 flex gap-3">
- <Link href="#" className="inline-flex items-center gap-2 bg-[#7ce24a] text-[#2c2016] font-black px-4 py-2 rounded-lg text-sm hover:bg-[#6dd43d] transition-colors shadow-[3px_3px_0_rgba(0,0,0,0.2)]">
- <MessageCircle className="w-4 h-4" /> Join WhatsApp
- </Link>
- </div>
- </div>
- </div>
- </div>
- </section>
-
- {/* ── REWARDS ── */}
- <section className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>Good work <span className="text-[#c0392b]">glows.</span></SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] text-lg -mt-8 mb-10 max-w-xl">Not just applause — <span className="font-black text-[#2c2016] bg-[#7ce24a]/30 px-1.5 rounded">drip, proof, and plug-ins</span> that outlast the demo.</p>
-
- <div className="grid sm:grid-cols-3 gap-6">
- {rewards.map((r, i) => (
- <motion.div
- key={i}
- initial={{ opacity: 0, y: 20 }}
- whileInView={{ opacity: 1, y: 0 }}
- transition={{ duration: 0.5, delay: i * 0.1 }}
- viewport={{ once: true }}
- className="bg-[#ede4d0]/70 border-2 border-[#2c2016]/15 rounded-2xl p-8 flex flex-col items-center text-center gap-3 hover:border-[#c0392b]/40 hover:bg-[#ede4d0] hover:shadow-[4px_4px_0_rgba(44,32,22,0.08)] transition-all group"
- >
- <div className="w-14 h-14 rounded-full bg-[#2c2016] text-[#7ce24a] flex items-center justify-center group-hover:scale-110 group-hover:bg-[#c0392b] group-hover:text-[#f2ede4] transition-all">
- {r.icon}
- </div>
- <h4 className={`text-xl font-black text-[#2c2016] ${fredoka.className}`}>{r.title}</h4>
- <p className="text-sm text-[#7a5c3e] leading-relaxed">{r.desc}</p>
- </motion.div>
- ))}
- </div>
- </section>
-
- {/* ── SPONSORS ── */}
-      <section className="py-20 md:py-28 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
-        <div className="max-w-6xl mx-auto px-6 text-center">
-          <p className="text-xs font-black text-[#8b6340] uppercase tracking-[0.4em] mb-3">Powered By & Supported By</p>
-          <h3 className={`text-3xl md:text-4xl font-black text-[#2c2016] mb-4 ${fredoka.className}`}>Fuel the fall. <span className="text-[#c0392b]">Power the rise.</span></h3>
-          <p className="text-sm md:text-base text-[#7a5c3e] max-w-2xl mx-auto mb-12">Our sponsors kill the paywall — <span className="font-black text-[#2c2016]">100% free</span> for every teen who wants to build. No tickets, just talent.</p>
-          <div className="inline-flex flex-col items-center gap-4 bg-white border-2 border-dashed border-[#2c2016]/20 rounded-2xl px-10 py-12 shadow-[6px_6px_0_rgba(44,32,22,0.08)] max-w-xl mx-auto">
-            <div className="w-16 h-16 rounded-2xl bg-[#2c2016] flex items-center justify-center">
-              <span className="text-2xl">✦</span>
+      <section id="top" className="hero-section">
+        <div className="hero-grid" aria-hidden="true" />
+        <motion.div style={{ y: heroY }} className="hero-inner page-width">
+          <div className="hero-kicker"><span>FALLINGSUN / 2026</span><span>DELHI NCR · INDIA</span></div>
+          <div className="hero-layout">
+            <div className="hero-copy">
+              <p className="eyebrow">24 HOURS / UNDER 18 / FREE TO JOIN</p>
+              <h1>FALLING<br /><em>SUN</em><b>.</b></h1>
+              <p className="hero-deck">The sun falls. Something rises.</p>
+              <p className="hero-body">A pressure-cooker for young builders who would rather ship than yap. Bring the spark. Leave with something real.</p>
+              <div className="hero-actions"><a href="#about" className="brutal-button red">ENTER THE EVENT <span>↘</span></a><span className="mono-note">SCROLL TO DECODE ↓</span></div>
             </div>
-            <h4 className={`text-2xl md:text-3xl font-black text-[#2c2016] tracking-tight ${fredoka.className}`}>Sponsors to be revealed</h4>
-            <p className={`text-sm text-[#7a5c3e] leading-relaxed ${dmSans.className}`}>We&apos;re locking in partners who believe in teen builders. Stay tuned — big names dropping soon.</p>
-            <p className="text-[10px] font-black tracking-[0.3em] uppercase text-[#8b6340] mt-2">Powered by Unstop — more to come</p>
+            <div className="hero-visual">
+              <div className="visual-label"><span>LIVE FEED // 01</span><span>MP4 / LOOP</span></div>
+              <div className="video-frame">
+                <video autoPlay muted loop playsInline className="h-full w-full object-cover"><source src="/Animate_pixel_art_sunset_scene_202608251027_gwr_video_mvp.mp4" type="video/mp4" /></video>
+                <div className="video-crosshair" aria-hidden="true">+</div>
+              </div>
+              <div className="visual-caption">BUILD AFTER DARK<br /><span>SHIP BEFORE SUNRISE</span></div>
+            </div>
           </div>
-          <div className="mt-12">
-            <a href="#contact" className="inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] font-bold px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#c0392b] hover:border-[#c0392b] transition-colors shadow-[4px_4px_0_rgba(44,32,22,0.3)] group text-sm">
-              Back the Builders <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </a>
-          </div>
+          <div className="hero-facts">{heroStats.map((stat, i) => <div key={stat}><span>0{i + 1}</span>{stat}</div>)}</div>
+        </motion.div>
+      </section>
+
+      <div className="ticker" aria-label="Event message"><div>THE SUN FALLS <span>✳</span> SOMETHING RISES <span>✳</span> THE SUN FALLS <span>✳</span> SOMETHING RISES <span>✳</span></div></div>
+
+      <section id="about" className="section page-width">
+        <SectionTitle index="01">Why <span className="red-text">Falling Sun?</span></SectionTitle>
+        <div className="about-grid">
+          <div className="about-lead"><p>Because legendary ideas don&apos;t RSVP. They crash in at <strong>2 AM</strong>, wired on caffeine and chaos, when you stop overthinking and start shipping.</p><div className="quote-mark">“</div></div>
+          <div className="about-copy"><p>The sun dipping isn&apos;t the finish line. <strong>It&apos;s the ignition.</strong> That amber hour when daydreamers clock out and builders light up.</p><p>FallingSun is a <mark>24-hour pressure-cooker</mark> for under-18s who&apos;d rather ship than yap. Turn raw sparks into working products — backed by mentors, infrastructure, and a room buzzing at 3 AM like a rave for debuggers.</p></div>
+        </div>
+        <div className="image-strip"><figure><img src="/comic-idea.png" alt="Hour 1: the idea phase" /><figcaption>HOUR 01 / THE IDEA</figcaption></figure><figure><img src="/comic-stack.png" alt="Hour 6: stack and initial setup" /><figcaption>HOUR 06 / THE STACK</figcaption></figure><div className="poster-stamp">BUILD<br />SOMETHING<br /><span>REAL</span></div></div>
+      </section>
+
+      <section id="playbook" className="section dark-section">
+        <div className="page-width"><SectionTitle index="02" light>From spark<br />to <span className="yellow-text">stage.</span></SectionTitle>
+          <div className="process-grid">{processSteps.map((step, i) => <motion.article key={step.step} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.08 }} viewport={{ once: true }} className="process-card"><div className="process-number">{step.step}</div><div className="process-icon">{step.icon}</div><h3>{step.title}</h3><p>{step.desc}</p></motion.article>)}</div>
         </div>
       </section>
 
- {/* ── SCHEDULE ── */}
- <section className="py-24 px-6 max-w-5xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>The <span className="text-[#c0392b]">24-Hour</span> Sprint</SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] -mt-8 mb-10 max-w-xl">Two days. One ship window. <span className="font-black text-[#c0392b]">Every minute counts.</span></p>
-
- <div className="grid md:grid-cols-2 gap-10">
- {/* Day 1 */}
- <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }}
- className="card-3d bg-[#ede4d0] border-2 border-[#2c2016]/20 rounded-2xl p-7 shadow-[6px_6px_0_rgba(44,32,22,0.12)]">
- <h3 className={`text-2xl font-black mb-7 flex items-center gap-3 text-[#2c2016] ${fredoka.className}`}>
- <span className="w-9 h-9 rounded-full bg-[#c0392b] text-white flex items-center justify-center text-base font-black">1</span>
- Day One — <span className="text-[#c0392b]">Ignite</span>
- </h3>
- <div className="space-y-5">
- {[
- { t: "09:00", a: "Participant Check-in", d: "ID verification · Registration · Claim your corner", tag: "ADMIN" },
- { t: "09:30", a: "Opening Ceremony + Rules", d: "Welcome · Rules · Judging tea ☕", tag: "SYSTEM" },
- { t: "10:00", a: "Workshops / Bootcamp", d: "Godot · GitHub · Ship-hack speedruns", tag: "LEARN" },
- { t: "11:15", a: "Idea Lock 🔒", d: "Choose track · Finalize idea — no backsies", tag: "BUILD" },
- { t: "12:00", a: "Build Sprint", d: "Prototype mode: ON. Go wild.", tag: "BUILD" },
- { t: "13:00", a: "Lunch Break", d: "Refuel. Touch grass. Plot comeback.", tag: "PAUSE" },
- { t: "13:45", a: "Build Sprint", d: "Code · Design · Break · Fix · Repeat", tag: "BUILD" },
- { t: "16:30", a: "Fun Activity", d: "Quick games · Energy spike · Memes IRL", tag: "FUN" },
- { t: "17:00", a: "Mentor Check-in", d: "Feedback that actually helps you ship", tag: "CHECK" },
- { t: "18:00", a: "Build Sprint", d: "The golden hour — polish till it shines", tag: "BUILD" },
- { t: "19:30", a: "Day 1 Wrap-up", d: "Standup · Plan the night strike", tag: "ADMIN" },
- { t: "20:00", a: "Day 1 Ends", d: "Rest. Recharge. Tomorrow you ship. 🌙", tag: "END" },
- ].map((item, i) => (
- <div key={i} className="flex gap-4 items-start group">
- <span className="font-mono text-[#c0392b] font-bold text-sm w-12 shrink-0 pt-0.5">{item.t}</span>
- <div className="flex-1 min-w-0">
- <div className="flex flex-wrap items-center gap-2">
- <p className="font-bold text-[#2c2016] group-hover:text-[#c0392b] transition-colors">{item.a}</p>
- <span className="text-[9px] font-black tracking-widest uppercase text-[#8b6340] bg-[#2c2016]/5 border border-[#2c2016]/15 rounded-full px-2 py-0.5 shrink-0">{item.tag}</span>
- </div>
- <p className="text-xs text-[#8b6340]">{item.d}</p>
- </div>
- </div>
- ))}
- </div>
- </motion.div>
-
- {/* Day 2 */}
- <motion.div initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.15 }} viewport={{ once: true }}
- className="card-3d bg-[#ede4d0] border-2 border-[#2c2016]/20 rounded-2xl p-7 shadow-[6px_6px_0_rgba(44,32,22,0.12)]">
- <h3 className={`text-2xl font-black mb-7 flex items-center gap-3 text-[#2c2016] ${fredoka.className}`}>
- <span className="w-9 h-9 rounded-full bg-[#7ce24a] border-2 border-[#2c2016] text-[#2c2016] flex items-center justify-center text-base font-black">2</span>
- Day Two — <span className="text-[#c0392b]">Ship</span>
- </h3>
- <div className="space-y-5">
- {[
- { t: "08:00", a: "Resume Builds", d: "Coffee. Code. Conquer.", tag: "START", hot: false },
- { t: "09:00", a: "Final Development", d: "Kill bugs · Add shine · Test like mad", tag: "BUILD", hot: false },
- { t: "11:00", a: "Submission Opens", d: "Upload build + docs + demo link", tag: "SYSTEM", hot: false },
- { t: "12:30", a: "Lunch + Demo Prep", d: "Eat · Breathe · Rehearse your flex", tag: "PAUSE", hot: false },
- { t: "14:00", a: "FINAL SUBMISSION DEADLINE", d: "Hard cutoff — no late merges, no mercy ⏰", tag: "DEADLINE", hot: true },
- { t: "14:00", a: "Presentations & Demos", d: "3 min to own the room — make it count", tag: "SYSTEM", hot: false },
- { t: "16:30", a: "Project Showcase", d: "Wander. Play. Steal ideas (with love).", tag: "FUN", hot: false },
- { t: "17:30", a: "Student Voting", d: "Peer power — vote for what moved you", tag: "VOTE", hot: false },
- { t: "18:00", a: "Results + Closing", d: "Winners, shouts & standing ovations", tag: "ADMIN", hot: false },
- { t: "19:00", a: "Closing Ceremony", d: "Awards · Photos · The afterglow ✨", tag: "CLOSE", hot: false },
- ].map((item, i) => (
- <div key={i} className={`flex gap-4 items-start group ${item.hot ? 'bg-[#c0392b]/10 -mx-3 px-3 py-2 rounded-lg border border-[#c0392b]/30' : ''}`}>
- <span className={`font-mono font-bold text-sm w-12 shrink-0 pt-0.5 ${item.hot ? 'text-[#c0392b] font-black' : 'text-[#c0392b]'}`}>{item.t}</span>
- <div className="flex-1 min-w-0">
- <div className="flex flex-wrap items-center gap-2">
- <p className={`font-bold ${item.hot ? 'text-[#c0392b]' : 'text-[#2c2016] group-hover:text-[#c0392b]'} transition-colors`}>{item.a}</p>
- <span className={`text-[9px] font-black tracking-widest uppercase rounded-full px-2 py-0.5 shrink-0 border ${item.hot ? 'text-[#c0392b] border-[#c0392b]/40 bg-[#c0392b]/10' : 'text-[#8b6340] border-[#2c2016]/15 bg-[#2c2016]/5'}`}>{item.tag}</span>
- </div>
- <p className="text-xs text-[#8b6340]">{item.d}</p>
- </div>
- </div>
- ))}
- </div>
- </motion.div>
- </div>
- </section>
-
- {/* ── ORGANIZERS ── */}
- <section className="py-20 bg-[#2c2016] overflow-hidden">
- <div className="text-center mb-12 px-6">
- <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-2">Meet The Builders ✦</p>
- <h2 className={`text-4xl md:text-5xl font-black text-[#f2ede4] ${fredoka.className}`}>
- Friendly eyes. <span className="text-[#7ce24a]">Savage talent.</span>
- </h2>
- <p className="text-[#c8b99a] mt-3">The crew turning moonlight into <span className="text-[#7ce24a] font-bold">momentum.</span> <span className="hidden sm:inline text-[#f2ede4]/50">← drag to meet all →</span></p>
- </div>
- <div className="w-full h-[520px]">
- <WheelCarousel
- items={organizers}
- mode="dark"
- photoSide="right"
- photoAspect="1/1"
- photoWidth={32}
- contentWidth={1000}
- gap={40}
- radius={280}
- spacing={18}
- visibleItems={4}
- background="transparent"
- textColor="rgba(242,237,228,0.3)"
- selectedColor="#7ce24a"
- markerColor="#c0392b"
- />
- </div>
-
- <div className="max-w-3xl mx-auto mt-2 px-6">
- <p className="text-center text-xs font-black text-[#7ce24a]/70 uppercase tracking-[0.3em] mb-6">Mentors — Your Secret Weapons</p>
- <div className="flex flex-wrap justify-center gap-6">
- {mentors.map((m, i) => (
- <div key={i} className="flex items-center gap-3 bg-[#1a120b]/60 border border-[#f2ede4]/10 rounded-full pr-5 pl-2 py-2 hover:border-[#7ce24a]/40 hover:bg-[#1a120b] transition-colors">
- <img src={m.image} alt={m.name} className="w-10 h-10 rounded-full object-cover" />
- <div className="text-left">
- <p className="text-sm font-bold text-[#f2ede4]">{m.name}</p>
- <p className="text-[10px] text-[#7ce24a] uppercase tracking-widest font-bold">{m.role} ✦ Ready to help</p>
- </div>
- </div>
- ))}
- </div>
- </div>
- </section>
-
- {/* ── RULES ── */}
- <section id="rules" className="py-24 px-6 max-w-4xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>Play <span className="text-[#c0392b]">fair.</span> Ship <span className="text-[#7ce24a]">proud.</span></SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] text-lg -mt-8 mb-10">Keep it real, keep it original, <span className="font-black text-[#2c2016]">keep the vibe clean.</span></p>
-
- <ol className="grid sm:grid-cols-2 gap-4 list-none">
- {rules.map((r, i) => (
- <motion.li
- key={i}
- initial={{ opacity: 0, y: 10 }}
- whileInView={{ opacity: 1, y: 0 }}
- transition={{ duration: 0.4, delay: i * 0.05 }}
- viewport={{ once: true }}
- className="flex gap-3 items-start bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-4 hover:bg-[#ede4d0] hover:border-[#c0392b]/20 hover:shadow-[3px_3px_0_rgba(44,32,22,0.08)] transition-all"
- >
- <span className="font-mono font-black text-[#c0392b] shrink-0 pt-0.5 bg-[#c0392b]/10 w-7 h-7 flex items-center justify-center rounded-lg text-xs">{String(i + 1).padStart(2, "0")}</span>
- <span className="text-sm text-[#5a3e2b] leading-relaxed">{r}</span>
- </motion.li>
- ))}
- </ol>
- </section>
-
- {/* ── FAQ ── */}
- <section id="faq" className="py-24 px-6 max-w-3xl mx-auto">
- <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
- <SectionTitle accent>Got <span className="text-[#c0392b]">Questions?</span></SectionTitle>
- </motion.div>
- <p className="text-[#7a5c3e] -mt-8 mb-8">We’ve got answers — no boring legalese, just straight talk.</p>
- <Accordion type="single" collapsible className="w-full space-y-3">
- {[
- { q: "Who can actually pull up?", a: "Any student under 18 who’s down to build. First-timer or serial shipper — if you’ve got curiosity and a laptop, you’re in. Under-18 only, strictly 13-18." },
- { q: "What’s the vibe? Code of Conduct?", a: "Respect is non-negotiable. No harassment, no gatekeeping, no jerks. Lift each other up, share the sauce, and make something unforgettable — together." },
- { q: "No team? No problem?", a: "Absolutely not! We run live team-match at kickoff. Walk in solo, walk out with a crew. Some of the best builds started with a shy “wanna team?”" },
- { q: "What do I actually need to bring?", a: "Laptop + charger + student ID + that weird idea you’ve been saving. We’ve got WiFi, food, power, and mentors for the rest. Sleep optional." },
- { q: "Real talk — is it actually free?", a: "100% free. Zero catch. No ticket, no hidden fees. We handle food & infra so you can focus on flexing your build. Just bring parent consent." },
- ].map((item, i) => (
- <AccordionItem key={i} value={`item-${i}`} className="bg-[#ede4d0]/80 border-2 border-[#2c2016]/15 rounded-xl px-5 data-[state=open]:border-[#c0392b]/40 data-[state=open]:bg-[#ede4d0] transition-colors">
- <AccordionTrigger className="text-[#2c2016] font-bold text-base hover:text-[#c0392b] hover:no-underline">{item.q}</AccordionTrigger>
- <AccordionContent className="text-[#7a5c3e] leading-relaxed">{item.a}</AccordionContent>
- </AccordionItem>
- ))}
- </Accordion>
- </section>
-
- 
-      {/* ── CODE OF CONDUCT ── */}
-      <section id="code-of-conduct" className="py-24 px-6 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
-        <div className="max-w-4xl mx-auto">
-          <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }} className="text-center mb-10">
-            <p className="text-xs font-black tracking-[0.4em] uppercase text-[#c0392b] mb-3">Code of Conduct · Last Updated: 2026</p>
-            <h2 className={`text-4xl md:text-5xl font-black tracking-tight text-[#2c2016] leading-tight ${fredoka.className}`}>
-              Code of Conduct
-            </h2>
-            <div className="mt-3 h-1.5 w-16 rounded-full bg-[#c0392b] mx-auto" />
-          </motion.div>
-
-          <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.6 }} viewport={{ once: true }} className="bg-[#2c2016] text-[#f2ede4] rounded-2xl p-6 md:p-8 mb-10 border-2 border-[#2c2016] shadow-[6px_6px_0_rgba(44,32,22,0.15)] relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-32 h-32 bg-[#c0392b]/10 rounded-full blur-3xl pointer-events-none" />
-            <p className={`text-base md:text-lg leading-relaxed ${dmSans.className}`}>
-              <span className="font-black text-white">Okay real talk for a sec.</span> <br /><br />
-              Falling Sun is chaotic on purpose — crazy builds, late nights, zero boring vibes. But &quot;chaotic&quot; is the energy, not the environment. Everything on the ground — safety, fairness, judging, food, Wi-Fi, all of it — is fully managed by us so you can just focus on shipping something insane. <br /><br />
-              So before the sun falls, give this a read. It&apos;s not scary, it&apos;s just what keeps this thing actually good instead of just another group chat with a prize pool.
-            </p>
-          </motion.div>
-
-          <Accordion type="single" collapsible className="w-full space-y-3">
-            {codeOfConduct.map((item, i) => (
-              <AccordionItem key={i} value={`coc-${i}`} className="bg-white border-2 border-[#2c2016]/10 rounded-xl px-5 data-[state=open]:border-[#c0392b]/30 data-[state=open]:bg-[#fffef8] transition-colors shadow-[3px_3px_0_rgba(44,32,22,0.06)] data-[state=open]:shadow-[4px_4px_0_rgba(44,32,22,0.10)]">
-                <AccordionTrigger className={`text-[#2c2016] font-bold text-base hover:text-[#c0392b] hover:no-underline py-4 text-left ${dmSans.className}`}>
-                  <span className="flex items-center gap-3">
-                    <span className="w-8 h-8 rounded-lg bg-[#2c2016] text-[#f2ede4] flex items-center justify-center text-xs font-black shrink-0 group-data-[state=open]:bg-[#c0392b] transition-colors">{item.n}</span>
-                    <span className={`${fredoka.className} font-bold`}>{item.title}</span>
-                  </span>
-                </AccordionTrigger>
-                <AccordionContent className={`text-[#5a3e2b] leading-relaxed text-sm pb-4 ${dmSans.className}`}>
-                  {item.body}
-                </AccordionContent>
-              </AccordionItem>
-            ))}
-          </Accordion>
-
-          <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} transition={{ delay: 0.3 }} viewport={{ once: true }} className="mt-10 text-center">
-            <div className={`inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] px-6 py-3 rounded-full border-2 border-[#2c2016] shadow-[3px_3px_0_rgba(44,32,22,0.2)] ${fredoka.className}`}>
-              <span>☀</span> By registering for Falling Sun, you&apos;re saying you&apos;ve read this and you&apos;re in. <span>☀</span>
-            </div>
-            <p className={`mt-3 text-xs font-bold tracking-widest uppercase text-[#8b6340] ${dmSans.className}`}>Build. Ship. Rise. — responsibly.</p>
-          </motion.div>
-        </div>
+      <section className="section page-width qualify-section">
+        <SectionTitle index="03">How to <span className="red-text">qualify.</span></SectionTitle>
+        <div className="qualify-grid"><div className="qualify-list">{qualifySteps.map(step => <div key={step.step} className="qualify-row"><span className="qualify-num">{step.step}</span><div><h3>{step.title}</h3><p>{step.desc}</p></div></div>)}</div><div className="black-note"><p className="eyebrow yellow-text">NO GATEKEEPING / BEGINNER FRIENDLY</p><h3>Show up.<br />Lock in.<br /><span>Ship hard.</span></h3><p>Guides, mentors, and a community that has your back at 2 AM.</p><Link href="#contact" className="brutal-button yellow">JOIN THE COMMUNITY ↗</Link></div></div>
       </section>
 
-      {/* ── CTA FOOTER ── */}
- <footer id="contact" className="py-24 px-6 bg-[#2c2016] relative overflow-hidden">
- <div className="absolute inset-0 opacity-5 bg-[url('/falling-sun-poster.png')] bg-cover bg-center" />
- <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-[#7ce24a]/5 rounded-full blur-[100px] pointer-events-none" />
- <div className="max-w-4xl mx-auto text-center relative z-10 flex flex-col items-center">
- <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-4 animate-pulse">The Horizon Is Burning ✦</p>
- <h2 className={`text-5xl md:text-7xl font-black text-[#f2ede4] mb-3 tracking-tight ${fredoka.className}`}>
- We Are <span className="text-[#7ce24a]">Ready.</span>
- </h2>
- <h2 className={`text-5xl md:text-7xl font-black text-[#c0392b] mb-8 tracking-tight ${fredoka.className}`}>
- Are You?
- </h2>
- <p className="text-xl text-[#c8b99a] mb-10 max-w-lg">Stuck? Hyped? Wanna <span className="text-[#7ce24a] font-bold">sponsor the chaos</span>? Hit us — we reply faster than your build compiles.</p>
- <div className="flex flex-wrap justify-center gap-4">
- <a href="https://wa.me/" target="_blank" rel="noopener noreferrer"
- className="inline-flex items-center gap-3 bg-[#7ce24a] text-[#2c2016] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#6dd43d] transition-all hover:scale-105 shadow-[4px_4px_0_rgba(44,32,22,0.4)] group badge-shine relative overflow-hidden">
- <span className="relative z-10 flex items-center gap-3"><MessageCircle className="w-5 h-5" /> Join WhatsApp Community</span>
- </a>
- <a href="mailto:hello@fallingsun.dev"
- className="inline-flex items-center gap-3 bg-transparent text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#f2ede4]/30 hover:border-[#f2ede4] hover:bg-[#f2ede4]/10 transition-all hover:scale-105">
- Email Us <span className="group-hover:translate-x-1 transition-transform">→</span>
- </a>
- </div>
+      <section className="section rewards-section"><div className="page-width"><SectionTitle index="04">Good work <span className="red-text">glows.</span></SectionTitle><div className="rewards-grid">{rewards.map(reward => <article className="reward-card" key={reward.title}><div className="reward-icon">{reward.icon}</div><h3>{reward.title}</h3><p>{reward.desc}</p></article>)}</div></div></section>
 
- <div className="mt-14 pt-8 border-t border-[#f2ede4]/10 w-full flex flex-col items-center gap-5">
- <p className={`text-lg text-[#f2ede4] ${fredoka.className}`}>
- FALLINGSUN — <span className="text-[#7ce24a]">Build after dark.</span> Flex by sunrise.
- </p>
- <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-widest text-[#c8b99a]">
- <a href="#contact" className="hover:text-[#7ce24a] transition-colors">Registration</a>
- <a href="#" className="inline-flex items-center gap-1.5 hover:text-[#7ce24a] transition-colors">
- <Github className="w-3.5 h-3.5" /> GitHub Repo
- </a>
-  <a href="#code-of-conduct" className="hover:text-[#7ce24a] transition-colors">Code of Conduct</a>
- <a href="#" className="hover:text-[#7ce24a] transition-colors">Guardian Consent Form</a>
- <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="hover:text-[#7ce24a] transition-colors">Organiser Contact</a>
- </div>
- </div>
- </div>
- </footer>
- </main>
- )
+      <section id="sponsors" className="section dark-section sponsor-section"><div className="page-width"><SectionTitle index="05" light>Back the<br /><span className="red-text">builders.</span></SectionTitle><p className="section-intro light-copy">Our sponsors kill the paywall — 100% free for every teen who wants to build. The board is sealed until the roster is ready.</p><LockedPanel kind="sponsors" /></div></section>
+
+      <section id="schedule" className="section page-width"><SectionTitle index="06">The 24-hour <span className="red-text">sprint.</span></SectionTitle><p className="section-intro">Two days. One ship window. Every minute counts.</p><div className="schedule-grid">{schedule.map((day) => <article className="schedule-card" key={day.day}><div className="schedule-heading"><span>{day.day}</span><h3>{day.title}</h3></div><div className="schedule-list">{day.items.map(([time, title, desc, tag]) => <div key={`${time}-${title}`} className={`schedule-row ${tag === "DEADLINE" ? "deadline" : ""}`}><span className="time">{time}</span><div><h4>{title}</h4><p>{desc}</p></div><span className="tag">{tag}</span></div>)}</div></article>)}</div></section>
+
+      <section className="section people-section"><div className="page-width"><SectionTitle index="07" light>The crew<br /><span className="yellow-text">behind it.</span></SectionTitle><div className="people-carousel"><WheelCarousel items={organizers} mode="dark" photoSide="right" photoAspect="1/1" photoWidth={32} contentWidth={1000} gap={40} radius={280} spacing={18} visibleItems={4} background="transparent" textColor="rgba(245,241,232,0.3)" selectedColor="#f4d900" markerColor="#d90429" /></div><div className="mentor-grid">{mentors.map(mentor => <div className="mentor-card" key={mentor.name}><img src={mentor.image} alt={mentor.name} /><div><h3>{mentor.name}</h3><p>{mentor.role} / READY TO HELP</p></div></div>)}</div></div></section>
+
+      <section id="rules" className="section page-width rules-section"><SectionTitle index="08">Play fair.<br /><span className="red-text">Ship proud.</span></SectionTitle><p className="section-intro">Keep it real, keep it original, keep the vibe clean.</p><ol className="rules-grid">{rules.map((rule, i) => <li key={rule}><span>{String(i + 1).padStart(2, "0")}</span><p>{rule}</p></li>)}</ol></section>
+
+      <section id="faq" className="section page-width faq-section"><SectionTitle index="09">Questions?<br /><span className="red-text">Decoded.</span></SectionTitle><Accordion type="single" collapsible className="faq-list">{faq.map(([question, answer], i) => <AccordionItem key={question} value={`item-${i}`} className="faq-item"><AccordionTrigger>{question}</AccordionTrigger><AccordionContent>{answer}</AccordionContent></AccordionItem>)}</Accordion></section>
+
+      <section id="code-of-conduct" className="section conduct-section"><div className="page-width"><SectionTitle index="10">Code of<br /><span className="red-text">conduct.</span></SectionTitle><div className="conduct-lede"><p><strong>Okay real talk for a sec.</strong></p><p>Falling Sun is chaotic on purpose — crazy builds, late nights, zero boring vibes. But &quot;chaotic&quot; is the energy, not the environment. Everything on the ground — safety, fairness, judging, food, Wi-Fi, all of it — is fully managed by us so you can focus on shipping something insane.</p></div><Accordion type="single" collapsible className="faq-list conduct-list">{codeOfConduct.map(item => <AccordionItem key={item.n} value={`coc-${item.n}`} className="faq-item"><AccordionTrigger><span className="conduct-number">{item.n}</span>{item.title}</AccordionTrigger><AccordionContent>{item.body}</AccordionContent></AccordionItem>)}</Accordion><p className="conduct-footer">Build. Ship. Rise. — responsibly.</p></div></section>
+
+      <section id="register" className="section register-section"><div className="page-width"><SectionTitle index="11">Your next move<br /><span className="red-text">is locked.</span></SectionTitle><div className="register-layout"><div><p className="register-copy">Registration is coming. Keep the signal on and be ready when the gate opens.</p><div className="register-meta"><span>AGE / 13–18</span><span>TEAM / 1–4</span><span>FEE / ₹0</span></div></div><LockedPanel kind="register" /></div></div></section>
+
+      <footer id="contact" className="site-footer"><div className="page-width footer-grid"><div><a href="#top" className="footer-logo">F/S<span>.</span></a><p>Build after dark.<br />Flex by sunrise.</p></div><div className="footer-links"><a href="#rules">Rules</a><a href="#code-of-conduct">Code of Conduct</a><a href="mailto:hello@fallingsun.dev">Email the organisers</a><a href="https://wa.me/" target="_blank" rel="noopener noreferrer"><MessageCircle className="inline h-4 w-4" /> WhatsApp Community</a></div><div className="footer-end"><span>FALLINGSUN / 2026</span><span>DELHI NCR, INDIA</span></div></div></footer>
+    </main>
+  )
 }
