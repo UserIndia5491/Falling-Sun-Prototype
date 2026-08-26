@@ -4,27 +4,53 @@ import React from "react"
 import Link from "next/link"
 import { motion, useScroll, useTransform } from "framer-motion"
 import { Permanent_Marker } from "next/font/google"
-import { Lock, ChevronDown, CheckCircle2, MessageCircle, Star, Zap, Clock, Users } from "lucide-react"
+import {
+  Lock,
+  ChevronDown,
+  CheckCircle2,
+  MessageCircle,
+  Star,
+  Zap,
+  Clock,
+  Users,
+  Lightbulb,
+  Code,
+  BookOpen,
+  Rocket,
+  Gift,
+  Award,
+  GitBranch as Github,
+} from "lucide-react"
 import { WheelCarousel } from "@/components/ui/wheel-carousel"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
 const markerFont = Permanent_Marker({ weight: '400', subsets: ['latin'] })
 
 const organizers = [
-  { label: "Ayush Sharma", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=80", imageAlt: "Ayush" },
-  { label: "Tanmay Kumar", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80", imageAlt: "Tanmay" },
+  { label: "Tanmay", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80", imageAlt: "Tanmay" },
   { label: "Kartik Patel", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80", imageAlt: "Kartik" },
+  { label: "Ayush Sharma", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=80", imageAlt: "Ayush" },
   { label: "Harsh", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80", imageAlt: "Harsh" },
-  { label: "Swaransh", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80", imageAlt: "Swaransh" },
-  { label: "Yash", image: "https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?w=800&q=80", imageAlt: "Yash" },
+  { label: "Swarnash", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80", imageAlt: "Swarnash" },
+  { label: "Roshan", image: "https://api.dicebear.com/7.x/initials/svg?seed=Roshan&backgroundColor=c0392b", imageAlt: "Roshan" },
+  { label: "Yuvraj", image: "https://api.dicebear.com/7.x/initials/svg?seed=Yuvraj&backgroundColor=7ce24a", imageAlt: "Yuvraj" },
+]
+
+const mentors = [
+  { name: "Aniket Gabba", role: "Mentor", image: "https://api.dicebear.com/7.x/initials/svg?seed=Aniket+Gabba&backgroundColor=8b6340" },
+  { name: "Anand", role: "Mentor", image: "https://api.dicebear.com/7.x/initials/svg?seed=Anand&backgroundColor=8b6340" },
 ]
 
 const sponsors = [
-  { src: "https://cdn.simpleicons.org/nvidia/3d1a00", alt: "Nvidia", height: 28 },
-  { src: "https://cdn.simpleicons.org/supabase/3d1a00", alt: "Supabase", height: 28 },
-  { src: "https://cdn.simpleicons.org/github/3d1a00", alt: "GitHub", height: 28 },
-  { src: "https://cdn.simpleicons.org/vercel/3d1a00", alt: "Vercel", height: 28 },
+  { src: "https://falling-sun.vercel.app/assets/llf-BrSOIe-2.jpg", alt: "LLF" },
+  { src: "https://falling-sun.vercel.app/assets/Qualcomm-Logo-DvoLYaEA.png", alt: "Qualcomm" },
+  { src: "https://falling-sun.vercel.app/assets/fueler-DuVLbv5p.jpg", alt: "Fueler" },
+  { src: "https://falling-sun.vercel.app/assets/unstop-0kx1fwA9.png", alt: "Unstop" },
+  { src: "https://cdn.simpleicons.org/github/3d1a00", alt: "GitHub" },
+  { src: "https://falling-sun.vercel.app/assets/xyz-CkDqFRe3.webp", alt: ".xyz Domains" },
 ]
+
+const heroStats = ["24 HOURS (12+12)", "100% FREE", "UNDER 18", "30 TEAMS MAX"]
 
 const qualifySteps = [
   { icon: <Zap className="w-6 h-6" />, step: "01", title: "Register Your Team", desc: "Sign up solo or with up to 3 friends. Under-18 only — no exceptions." },
@@ -32,6 +58,31 @@ const qualifySteps = [
   { icon: <Star className="w-6 h-6" />, step: "03", title: "Attend the Workshop", desc: "Hit the morning bootcamp — Godot, GitHub, quick-start tips." },
   { icon: <Users className="w-6 h-6" />, step: "04", title: "Lock Your Idea", desc: "At 11:15, lock your track and commit. No pivoting after this." },
   { icon: <CheckCircle2 className="w-6 h-6" />, step: "05", title: "Build & Submit", desc: "24 hours. Build it, polish it, submit before 14:00 on Day 2. Hard cutoff." },
+]
+
+const processSteps = [
+  { icon: <Lightbulb className="w-6 h-6" />, step: "01", title: "Choose", desc: "Choose a problem statement or bring a half-formed thought." },
+  { icon: <Code className="w-6 h-6" />, step: "02", title: "Build", desc: "Full tech-stack freedom — web, mobile, CLI, hardware, whatever works." },
+  { icon: <BookOpen className="w-6 h-6" />, step: "03", title: "Learn", desc: "Mentorship + workshops to help you learn and ship." },
+  { icon: <Rocket className="w-6 h-6" />, step: "04", title: "Show", desc: "Demo + judging at the end — show what you built." },
+]
+
+const rewards = [
+  { icon: <Gift className="w-7 h-7" />, title: "Swag", desc: "Merch kits for top teams." },
+  { icon: <Award className="w-7 h-7" />, title: "Certs", desc: "Certificates for all participants." },
+  { icon: <Users className="w-7 h-7" />, title: "Mentors", desc: "Networking + mentorship access." },
+]
+
+const rules = [
+  "Open to students under 18 only (Ages 13 to 18).",
+  "Team size: 1 to 4 members.",
+  "All work must be original — no pre-built projects.",
+  "AI Usage: Max 40% AI-assisted work per project. All project descriptions must be human-written.",
+  "Must include a working demo at submission.",
+  "Source code must be submitted on public GitHub (You retain 100% project ownership).",
+  "Shh, don't fully vibe code — it deducts points.",
+  "Strict zero-tolerance policy on alcohol, smoking, vapes, weapons, or illegal substances.",
+  "Signed parent/guardian consent & waiver required prior to entry.",
 ]
 
 function SectionTitle({ children, accent }: { children: React.ReactNode, accent?: boolean }) {
@@ -75,6 +126,11 @@ export default function Home() {
         {/* Background: poster image + video */}
         <motion.div className="absolute inset-0 z-0" style={{ scale: posterScale }}>
           <div className="absolute inset-0 bg-[url('/falling-sun-poster.png')] bg-cover bg-center opacity-30" />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] aspect-square rounded-full blur-[120px] opacity-25 pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #7ce24a 0%, transparent 70%)' }}
+          />
           <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-20 mix-blend-multiply">
             <source src="/Animate_pixel_art_sunset_scene_202608251027_gwr_video_mvp.mp4" type="video/mp4" />
           </video>
@@ -100,6 +156,21 @@ export default function Home() {
           <p className="text-[#5a3e2b] font-mono tracking-[0.3em] uppercase text-sm md:text-base font-semibold bg-[#ede4d0]/70 px-6 py-2 rounded-full border border-[#2c2016]/20 backdrop-blur-sm">
             Under-18 · 24-Hour · Software Hackathon
           </p>
+
+          <div className="flex flex-wrap items-center justify-center gap-2 mt-5 max-w-md">
+            {heroStats.map((stat, i) => (
+              <span key={i} className="text-[10px] md:text-xs font-black tracking-widest uppercase bg-[#2c2016] text-[#f2ede4] px-3 py-1.5 rounded-full">
+                {stat}
+              </span>
+            ))}
+          </div>
+
+          <a
+            href="#contact"
+            className="mt-7 inline-flex items-center gap-2 bg-[#c0392b] text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#a53125] hover:scale-105 transition-all shadow-[4px_4px_0_rgba(44,32,22,0.4)] uppercase tracking-wide text-sm"
+          >
+            Register Your Team <span aria-hidden="true">→</span>
+          </a>
         </motion.div>
 
         <div className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 animate-bounce">
@@ -125,7 +196,7 @@ export default function Home() {
               <span className="font-bold not-italic text-[#c0392b]">{"It's"} when the real work starts.</span>
             </p>
             <p className="text-base text-[#7a5c3e] leading-relaxed bg-[#ede4d0]/80 p-5 rounded-2xl border border-[#2c2016]/10">
-              Falling Sun is an under-18 software hackathon for students who{"'"}d rather build than just talk about building. Over 24 hours, teams turn raw ideas into real, working projects — backed by mentors, proper infrastructure, and a room full of people who actually want to be there at 3 AM debugging.
+              FallingSun is a 24-hour software hackathon for students under 18 who{"'"}d rather build than just talk about building. Over 24 hours, teams turn raw ideas into real, working projects — backed by mentors, proper infrastructure, and a room full of people who actually want to be there at 3 AM debugging.
             </p>
           </motion.div>
 
@@ -164,6 +235,35 @@ export default function Home() {
           <p className="text-[#c8b99a] text-lg max-w-2xl mx-auto leading-relaxed">
             A 24-hour hackathon for students under 18 — built on the belief that the most remarkable things aren{"'"}t made in daylight hours.
           </p>
+        </div>
+      </section>
+
+      {/* ── HOW IT WORKS ── */}
+      <section className="py-24 px-6 md:px-16 max-w-6xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+          <SectionTitle accent>How It <span className="text-[#c0392b]">Works</span></SectionTitle>
+        </motion.div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {processSteps.map((s, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-6 flex flex-col gap-3"
+            >
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-[#2c2016] text-[#f2ede4] rounded-lg flex items-center justify-center font-black text-sm shrink-0">
+                  {s.step}
+                </div>
+                <span className="text-[#c0392b]">{s.icon}</span>
+              </div>
+              <h4 className="font-black text-[#2c2016] text-lg">{s.title}</h4>
+              <p className="text-[#7a5c3e] text-sm leading-relaxed">{s.desc}</p>
+            </motion.div>
+          ))}
         </div>
       </section>
 
@@ -225,15 +325,43 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ── REWARDS ── */}
+      <section className="py-24 px-6 md:px-16 max-w-5xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+          <SectionTitle accent>Good work <span className="text-[#c0392b]">glows.</span></SectionTitle>
+        </motion.div>
+        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10 max-w-xl">Swag, certificates, mentorship, and more — all the reasons to finish the thing.</p>
+
+        <div className="grid sm:grid-cols-3 gap-6">
+          {rewards.map((r, i) => (
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              viewport={{ once: true }}
+              className="bg-[#ede4d0]/70 border-2 border-[#2c2016]/15 rounded-2xl p-8 flex flex-col items-center text-center gap-3 hover:border-[#c0392b]/40 transition-colors"
+            >
+              <div className="w-14 h-14 rounded-full bg-[#2c2016] text-[#7ce24a] flex items-center justify-center">
+                {r.icon}
+              </div>
+              <h4 className={`text-xl font-black text-[#2c2016] ${markerFont.className}`}>{r.title}</h4>
+              <p className="text-sm text-[#7a5c3e] leading-relaxed">{r.desc}</p>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+
       {/* ── SPONSORS ── */}
       <section className="py-16 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
         <div className="max-w-5xl mx-auto px-6 text-center">
           <p className="text-xs font-black text-[#8b6340] uppercase tracking-[0.4em] mb-2">Powered By & Supported By</p>
-          <h3 className={`text-2xl font-black text-[#2c2016] mb-10 ${markerFont.className}`}>Our Tech Giants & Partners</h3>
+          <h3 className={`text-2xl font-black text-[#2c2016] mb-3 ${markerFont.className}`}>Powered by the community.</h3>
+          <p className="text-sm text-[#7a5c3e] max-w-xl mx-auto mb-10">Sponsors and partners help us keep this event free and open to every student who wants to build.</p>
           <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
             {sponsors.map((s, i) => (
               <motion.div key={i} whileHover={{ scale: 1.15, rotate: -3 }} transition={{ type: 'spring', stiffness: 300 }}>
-                <img src={s.src} alt={s.alt} height={s.height} className="h-8 w-auto grayscale hover:grayscale-0 transition-all" style={{ height: s.height }} />
+                <img src={s.src} alt={s.alt} className="h-8 w-auto grayscale hover:grayscale-0 transition-all" />
               </motion.div>
             ))}
           </div>
@@ -261,18 +389,26 @@ export default function Home() {
             </h3>
             <div className="space-y-5">
               {[
-                { t: "09:00", a: "Participant Check-in", d: "ID verification · Registration" },
-                { t: "09:30", a: "Opening Ceremony", d: "Welcome · Rules · Judging" },
-                { t: "10:00", a: "Workshops", d: "Godot · GitHub · Quick tips" },
-                { t: "11:15", a: "Idea Lock", d: "Choose track · Finalize idea" },
-                { t: "12:00", a: "Build Sprint", d: "Start building · Prototype" },
-                { t: "16:30", a: "Fun Activity", d: "Quick games · Team bonding" },
-                { t: "20:00", a: "Day 1 Ends", d: "Rest up. Tomorrow you ship." },
+                { t: "09:00", a: "Participant Check-in", d: "ID verification · Registration", tag: "ADMIN" },
+                { t: "09:30", a: "Opening Ceremony + Rules", d: "Welcome · Rules · Judging", tag: "SYSTEM" },
+                { t: "10:00", a: "Workshops / Bootcamp", d: "Godot · GitHub · Quick tips", tag: "LEARN" },
+                { t: "11:15", a: "Idea Lock", d: "Choose track · Finalize idea", tag: "BUILD" },
+                { t: "12:00", a: "Build Sprint", d: "Start building · Prototype", tag: "BUILD" },
+                { t: "13:00", a: "Lunch Break", d: "Recharge & reset", tag: "PAUSE" },
+                { t: "13:45", a: "Build Sprint", d: "Code · Design · Test", tag: "BUILD" },
+                { t: "16:30", a: "Fun Activity", d: "Quick games · Team bonding", tag: "FUN" },
+                { t: "17:00", a: "Mentor Check-in", d: "Progress check · Feedback", tag: "CHECK" },
+                { t: "18:00", a: "Build Sprint", d: "Improve · Polish · Test", tag: "BUILD" },
+                { t: "19:30", a: "Day 1 Wrap-up", d: "Updates · Tomorrow's plan", tag: "ADMIN" },
+                { t: "20:00", a: "Day 1 Ends", d: "Rest up. Tomorrow you ship.", tag: "END" },
               ].map((item, i) => (
                 <div key={i} className="flex gap-4 items-start group">
                   <span className="font-mono text-[#c0392b] font-bold text-sm w-12 shrink-0 pt-0.5">{item.t}</span>
-                  <div>
-                    <p className="font-bold text-[#2c2016] group-hover:text-[#c0392b] transition-colors">{item.a}</p>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className="font-bold text-[#2c2016] group-hover:text-[#c0392b] transition-colors">{item.a}</p>
+                      <span className="text-[9px] font-black tracking-widest uppercase text-[#8b6340] bg-[#2c2016]/5 border border-[#2c2016]/15 rounded-full px-2 py-0.5 shrink-0">{item.tag}</span>
+                    </div>
                     <p className="text-xs text-[#8b6340]">{item.d}</p>
                   </div>
                 </div>
@@ -289,18 +425,24 @@ export default function Home() {
             </h3>
             <div className="space-y-5">
               {[
-                { t: "08:00", a: "Resume Builds", d: "Back to building", hot: false },
-                { t: "11:00", a: "Submission Opens", d: "Upload project & required files", hot: false },
-                { t: "14:00", a: "FINAL DEADLINE", d: "Hard cutoff — no late submissions", hot: true },
-                { t: "14:00", a: "Presentations", d: "2-3 minutes per team", hot: false },
-                { t: "17:30", a: "Student Voting", d: "Fair community voting", hot: false },
-                { t: "18:00", a: "Results + Closing", d: "Winners · Special mentions", hot: false },
-                { t: "19:00", a: "Closing Ceremony", d: "Awards · Photos · Finale", hot: false },
+                { t: "08:00", a: "Resume Builds", d: "Back to building", tag: "START", hot: false },
+                { t: "09:00", a: "Final Development", d: "Final sprint · Testing · Polish", tag: "BUILD", hot: false },
+                { t: "11:00", a: "Submission Opens", d: "Upload project & required files", tag: "SYSTEM", hot: false },
+                { t: "12:30", a: "Lunch + Demo Prep", d: "Eat · Prepare your presentation", tag: "PAUSE", hot: false },
+                { t: "14:00", a: "FINAL SUBMISSION DEADLINE", d: "Hard cutoff — no late submissions", tag: "DEADLINE", hot: true },
+                { t: "14:00", a: "Presentations & Demos", d: "2–3 minutes per team", tag: "SYSTEM", hot: false },
+                { t: "16:30", a: "Project Showcase", d: "Explore builds · Meet teams", tag: "FUN", hot: false },
+                { t: "17:30", a: "Student Voting", d: "Fair community voting", tag: "VOTE", hot: false },
+                { t: "18:00", a: "Results + Closing", d: "Winners · Special mentions", tag: "ADMIN", hot: false },
+                { t: "19:00", a: "Closing Ceremony", d: "Awards · Photos · Finale", tag: "CLOSE", hot: false },
               ].map((item, i) => (
                 <div key={i} className={`flex gap-4 items-start group ${item.hot ? 'bg-[#c0392b]/10 -mx-3 px-3 py-2 rounded-lg border border-[#c0392b]/30' : ''}`}>
                   <span className={`font-mono font-bold text-sm w-12 shrink-0 pt-0.5 ${item.hot ? 'text-[#c0392b] font-black' : 'text-[#c0392b]'}`}>{item.t}</span>
-                  <div>
-                    <p className={`font-bold ${item.hot ? 'text-[#c0392b]' : 'text-[#2c2016] group-hover:text-[#c0392b]'} transition-colors`}>{item.a}</p>
+                  <div className="flex-1 min-w-0">
+                    <div className="flex flex-wrap items-center gap-2">
+                      <p className={`font-bold ${item.hot ? 'text-[#c0392b]' : 'text-[#2c2016] group-hover:text-[#c0392b]'} transition-colors`}>{item.a}</p>
+                      <span className={`text-[9px] font-black tracking-widest uppercase rounded-full px-2 py-0.5 shrink-0 border ${item.hot ? 'text-[#c0392b] border-[#c0392b]/40 bg-[#c0392b]/10' : 'text-[#8b6340] border-[#2c2016]/15 bg-[#2c2016]/5'}`}>{item.tag}</span>
+                    </div>
                     <p className="text-xs text-[#8b6340]">{item.d}</p>
                   </div>
                 </div>
@@ -315,9 +457,9 @@ export default function Home() {
         <div className="text-center mb-12 px-6">
           <p className="text-xs font-black text-[#7ce24a] uppercase tracking-[0.4em] mb-2">Meet The Builders</p>
           <h2 className={`text-4xl md:text-5xl font-black text-[#f2ede4] ${markerFont.className}`}>
-            The Team Behind <span className="text-[#7ce24a]">The Sun</span>
+            Friendly eyes. <span className="text-[#7ce24a]">Big questions.</span>
           </h2>
-          <p className="text-[#c8b99a] mt-3">We are not alone — we have a whole team to support you.</p>
+          <p className="text-[#c8b99a] mt-3">The people making FallingSun happen.</p>
         </div>
         <div className="w-full h-[580px]">
           <WheelCarousel
@@ -337,12 +479,51 @@ export default function Home() {
             markerColor="#c0392b"
           />
         </div>
+
+        <div className="max-w-3xl mx-auto mt-2 px-6">
+          <p className="text-center text-xs font-black text-[#7ce24a]/70 uppercase tracking-[0.3em] mb-6">Mentors</p>
+          <div className="flex flex-wrap justify-center gap-6">
+            {mentors.map((m, i) => (
+              <div key={i} className="flex items-center gap-3 bg-[#1a120b]/60 border border-[#f2ede4]/10 rounded-full pr-5 pl-2 py-2">
+                <img src={m.image} alt={m.name} className="w-10 h-10 rounded-full object-cover" />
+                <div className="text-left">
+                  <p className="text-sm font-bold text-[#f2ede4]">{m.name}</p>
+                  <p className="text-[10px] text-[#7ce24a] uppercase tracking-widest font-bold">{m.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── RULES ── */}
+      <section id="rules" className="py-24 px-6 max-w-4xl mx-auto">
+        <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
+          <SectionTitle accent>Play <span className="text-[#c0392b]">fair.</span></SectionTitle>
+        </motion.div>
+        <p className="text-[#7a5c3e] text-lg -mt-8 mb-10">Keep it fun, keep it original, keep it safe.</p>
+
+        <ol className="grid sm:grid-cols-2 gap-4 list-none">
+          {rules.map((r, i) => (
+            <motion.li
+              key={i}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: i * 0.05 }}
+              viewport={{ once: true }}
+              className="flex gap-3 items-start bg-[#ede4d0]/70 border border-[#2c2016]/15 rounded-xl p-4"
+            >
+              <span className="font-mono font-black text-[#c0392b] shrink-0 pt-0.5">{String(i + 1).padStart(2, "0")}</span>
+              <span className="text-sm text-[#5a3e2b] leading-relaxed">{r}</span>
+            </motion.li>
+          ))}
+        </ol>
       </section>
 
       {/* ── FAQ ── */}
-      <section className="py-24 px-6 max-w-3xl mx-auto">
+      <section id="faq" className="py-24 px-6 max-w-3xl mx-auto">
         <motion.div initial={{ opacity: 0, y: 40 }} whileInView={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }} viewport={{ once: true }}>
-          <SectionTitle accent>Rules & <span className="text-[#c0392b]">FAQ</span></SectionTitle>
+          <SectionTitle accent>FAQ</SectionTitle>
         </motion.div>
         <Accordion type="single" collapsible className="w-full space-y-3">
           {[
@@ -381,6 +562,21 @@ export default function Home() {
               className="inline-flex items-center gap-3 bg-transparent text-[#f2ede4] font-black px-8 py-4 rounded-xl border-2 border-[#f2ede4]/30 hover:border-[#f2ede4] transition-all hover:scale-105">
               Email Us →
             </a>
+          </div>
+
+          <div className="mt-14 pt-8 border-t border-[#f2ede4]/10 w-full flex flex-col items-center gap-5">
+            <p className={`text-lg text-[#f2ede4] ${markerFont.className}`}>
+              FALLINGSUN — Build something worth showing.
+            </p>
+            <div className="flex flex-wrap justify-center gap-x-6 gap-y-3 text-xs font-bold uppercase tracking-widest text-[#c8b99a]">
+              <a href="#contact" className="hover:text-[#7ce24a] transition-colors">Registration</a>
+              <a href="#" className="inline-flex items-center gap-1.5 hover:text-[#7ce24a] transition-colors">
+                <Github className="w-3.5 h-3.5" /> GitHub Repo
+              </a>
+              <a href="#faq" className="hover:text-[#7ce24a] transition-colors">Code of Conduct</a>
+              <a href="#" className="hover:text-[#7ce24a] transition-colors">Guardian Consent Form</a>
+              <a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="hover:text-[#7ce24a] transition-colors">Organiser Contact</a>
+            </div>
           </div>
         </div>
       </footer>
