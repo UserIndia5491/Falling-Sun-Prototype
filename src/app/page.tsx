@@ -219,6 +219,11 @@ const codeOfConduct = [
     title: "Final Word",
     body: "We (organizers) get to interpret these rules, sort out disputes, look into any issues, and remove anyone if needed, at any point during the event. Once we\u0027ve made a call, that\u0027s final. By registering for Falling Sun, you\u0027re saying you\u0027ve read this and you\u0027re in. \u2600 Build. Ship. Rise. — responsibly."
   },
+  {
+    n: "30",
+    title: "Need Help? Just Ask",
+    body: "Got a doubt before, during, or after the hack? Hit us on the official WhatsApp Community or email hello@fallingsun.dev — we actually reply. If you\u0027re unsure whether something breaks a rule, ask early. We\u0027d rather clear it up than have to enforce it later. This is a builder-first space — help is part of the build."
+  },
 ]
 
 function SectionTitle({ index, children, light = false }: { index: string, children: React.ReactNode, light?: boolean }) {
@@ -287,10 +292,15 @@ const schedule = [
 
 const faq = [
   ["Who can actually pull up?", "Any student under 18 who’s down to build. First-timer or serial shipper — if you’ve got curiosity and a laptop, you’re in. Under-18 only, strictly 13-18."],
-  ["What’s the vibe? Code of Conduct?", "Respect is non-negotiable. No harassment, no gatekeeping, no jerks. Lift each other up, share the sauce, and make something unforgettable — together."],
+  ["What’s the vibe? Code of Conduct?", "Respect is non-negotiable. No harassment, no gatekeeping, no jerks. Lift each other up, share the sauce, and make something unforgettable — together. Full 30-point code lives at /code-of-conduct."],
   ["No team? No problem?", "Absolutely not! We run live team-match at kickoff. Walk in solo, walk out with a crew. Some of the best builds started with a shy “wanna team?”"],
   ["What do I actually need to bring?", "Laptop + charger + student ID + that weird idea you’ve been saving. We’ve got WiFi, food, power, and mentors for the rest. Sleep optional."],
   ["Real talk — is it actually free?", "100% free. Zero catch. No ticket, no hidden fees. We handle food & infra so you can focus on flexing your build. Just bring parent consent."],
+  ["Where & when does it go down?", "Delhi NCR, India — 24 hours straight. Day 01 Ignite + Day 02 Ship. Check the 24-hour sprint schedule for exact timings."],
+  ["What can I even build?", "Anything that runs. Web, app, game, AI, hardware, CLI — no stack jail. If it solves something and you can demo it live, it counts."],
+  ["How are projects judged?", "Live demo, 3 mins to flex. We score technical depth, originality, execution & polish. Panel + organizer review — no gaming, just real building."],
+  ["Food, Wi-Fi, mentors — sorted?", "All covered. Food, power, Wi-Fi, and mentors on loop. You bring the laptop and the spark — we keep you charged and unblocked."],
+  ["I’m a total beginner — can I still ship?", "100%. Day 1 kicks with a 60-min bootcamp (Godot, GitHub, ship-hacks) + mentors on tap. First-timers ship every year."],
 ] as const
 
 export default function Home() {
@@ -302,7 +312,7 @@ export default function Home() {
       <header className="site-header">
         <a href="#top" className="brand-mark" aria-label="Falling Sun home"><span>F</span><span>/</span><span>S</span></a>
         <nav className="hidden items-center gap-7 font-mono text-[10px] font-bold uppercase tracking-[0.18em] md:flex">
-          <a href="#about">About</a><a href="#playbook">Playbook</a><a href="#schedule">Schedule</a><a href="#rules">Rules</a>
+          <a href="#about">About</a><a href="#playbook">Playbook</a><a href="#schedule">Schedule</a><a href="#rules">Rules</a><Link href="/code-of-conduct">Conduct</Link>
         </nav>
         <div className="header-lock"><Lock className="h-3.5 w-3.5" /> REGISTER // LOCKED</div>
       </header>
@@ -320,7 +330,6 @@ export default function Home() {
               <div className="hero-actions"><a href="#about" className="brutal-button red">ENTER THE EVENT <span>↘</span></a><span className="mono-note">SCROLL TO DECODE ↓</span></div>
             </div>
             <div className="hero-visual">
-              <div className="visual-label"><span>LIVE FEED // 01</span><span>MP4 / LOOP</span></div>
               <div className="video-frame">
                 <video autoPlay muted loop playsInline className="h-full w-full object-cover"><source src="/Animate_pixel_art_sunset_scene_202608251027_gwr_video_mvp.mp4" type="video/mp4" /></video>
                 <div className="video-crosshair" aria-hidden="true">+</div>
@@ -364,13 +373,13 @@ export default function Home() {
 
       <section id="rules" className="section page-width rules-section"><SectionTitle index="08">Play fair.<br /><span className="red-text">Ship proud.</span></SectionTitle><p className="section-intro">Keep it real, keep it original, keep the vibe clean.</p><ol className="rules-grid">{rules.map((rule, i) => <li key={rule}><span>{String(i + 1).padStart(2, "0")}</span><p>{rule}</p></li>)}</ol></section>
 
-      <section id="faq" className="section page-width faq-section"><SectionTitle index="09">Questions?<br /><span className="red-text">Decoded.</span></SectionTitle><Accordion type="single" collapsible className="faq-list">{faq.map(([question, answer], i) => <AccordionItem key={question} value={`item-${i}`} className="faq-item"><AccordionTrigger>{question}</AccordionTrigger><AccordionContent>{answer}</AccordionContent></AccordionItem>)}</Accordion></section>
+      <section id="faq" className="section page-width faq-section"><SectionTitle index="09">Questions?<br /><span className="red-text">Decoded.</span></SectionTitle><p className="section-intro" style={{marginTop: -22}}>10 answers — 5 per row on desktop. Tap to decode.</p><Accordion type="single" collapsible className="faq-list faq-grid">{faq.map(([question, answer], i) => <AccordionItem key={question} value={`item-${i}`} className="faq-item"><AccordionTrigger>{question}</AccordionTrigger><AccordionContent>{answer}</AccordionContent></AccordionItem>)}</Accordion></section>
 
-      <section id="code-of-conduct" className="section conduct-section"><div className="page-width"><SectionTitle index="10">Code of<br /><span className="red-text">conduct.</span></SectionTitle><div className="conduct-lede"><p><strong>Okay real talk for a sec.</strong></p><p>Falling Sun is chaotic on purpose — crazy builds, late nights, zero boring vibes. But &quot;chaotic&quot; is the energy, not the environment. Everything on the ground — safety, fairness, judging, food, Wi-Fi, all of it — is fully managed by us so you can focus on shipping something insane.</p></div><Accordion type="single" collapsible className="faq-list conduct-list">{codeOfConduct.map(item => <AccordionItem key={item.n} value={`coc-${item.n}`} className="faq-item"><AccordionTrigger><span className="conduct-number">{item.n}</span>{item.title}</AccordionTrigger><AccordionContent>{item.body}</AccordionContent></AccordionItem>)}</Accordion><p className="conduct-footer">Build. Ship. Rise. — responsibly.</p></div></section>
+      <section id="code-of-conduct" className="section conduct-section"><div className="page-width"><SectionTitle index="10">Code of<br /><span className="red-text">conduct.</span></SectionTitle><div className="conduct-lede"><p><strong>Okay real talk for a sec.</strong></p><p>Falling Sun is chaotic on purpose — crazy builds, late nights, zero boring vibes. But &quot;chaotic&quot; is the energy, not the environment. Everything on the ground — safety, fairness, judging, food, Wi-Fi, all of it — is fully managed by us so you can focus on shipping something insane.</p></div><div className="conduct-teaser"><div className="conduct-teaser-card"><p className="eyebrow" style={{color: 'var(--red)', marginBottom: 12}}>30 RULES • EVEN & COMPLETE • SEPARATE PAGE</p><h3>Read the full<br />Code of Conduct</h3><p>From who can join to AI policy, safety, judging & zero-tolerance — everything lives on its own page now. Clean, searchable, and always up to date.</p><div className="conduct-teaser-stats"><span><strong>30</strong> clauses</span><span><strong>100%</strong> builder-first</span><span><strong>↗</strong> separate page</span></div><Link href="/code-of-conduct" className="brutal-button red">OPEN CODE OF CONDUCT <span>↗</span></Link></div><div className="conduct-teaser-preview" aria-hidden="true"><div className="conduct-preview-grid">{codeOfConduct.slice(0,6).map(item => <div key={item.n} className="conduct-preview-item"><span>{item.n}</span><p>{item.title}</p></div>)}<div className="conduct-preview-more">+24 more →</div></div><p className="conduct-footer" style={{marginLeft:0, marginTop:18}}>Build. Ship. Rise. — responsibly.</p></div></div></div></section>
 
       <section id="register" className="section register-section"><div className="page-width"><SectionTitle index="11">Your next move<br /><span className="red-text">is locked.</span></SectionTitle><div className="register-layout"><div><p className="register-copy">Registration is coming. Keep the signal on and be ready when the gate opens.</p><div className="register-meta"><span>AGE / 13–18</span><span>TEAM / 1–4</span><span>FEE / ₹0</span></div></div><LockedPanel kind="register" /></div></div></section>
 
-      <footer id="contact" className="site-footer"><div className="page-width footer-grid"><div><a href="#top" className="footer-logo">F/S<span>.</span></a><p>Build after dark.<br />Flex by sunrise.</p></div><div className="footer-links"><a href="#rules">Rules</a><a href="#code-of-conduct">Code of Conduct</a><a href="mailto:hello@fallingsun.dev">Email the organisers</a><a href="https://wa.me/" target="_blank" rel="noopener noreferrer"><MessageCircle className="inline h-4 w-4" /> WhatsApp Community</a></div><div className="footer-end"><span>FALLINGSUN / 2026</span><span>DELHI NCR, INDIA</span></div></div></footer>
+      <footer id="contact" className="site-footer"><div className="page-width footer-grid"><div><a href="#top" className="footer-logo">F/S<span>.</span></a><p>Build after dark.<br />Flex by sunrise.</p></div><div className="footer-links"><a href="#rules">Rules</a><Link href="/code-of-conduct">Code of Conduct</Link><a href="mailto:hello@fallingsun.dev">Email the organisers</a><a href="https://wa.me/" target="_blank" rel="noopener noreferrer"><MessageCircle className="inline h-4 w-4" /> WhatsApp Community</a></div><div className="footer-end"><span>FALLINGSUN / 2026</span><span>DELHI NCR, INDIA</span></div></div></footer>
     </main>
   )
 }
