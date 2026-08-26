@@ -22,9 +22,9 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 
 
 const organizers = [
-  { label: "Tanmay", image: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=800&q=80", imageAlt: "Tanmay", role: "Organizer" },
-  { label: "Kartik Patel", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80", imageAlt: "Kartik", role: "Organizer" },
-  { label: "Ayush Sharma", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=80", imageAlt: "Ayush", role: "Organizer" },
+  { label: "Tanmay", image: "/tanmay", imageAlt: "Tanmay", role: "Organizer" },
+  { label: "Kartik Patel", image: "/kartik.png", imageAlt: "Kartik", role: "Organizer" },
+  { label: "Ayush Sharma", image: "/ayush", imageAlt: "Ayush", role: "Organizer" },
 ]
 
 const coOrganizers = [
