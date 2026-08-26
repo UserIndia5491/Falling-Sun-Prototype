@@ -207,13 +207,7 @@ export default function CodeOfConductPage() {
         </div>
       </section>
 
-      <footer id="contact" className="site-footer">
-        <div className="page-width footer-grid">
-          <div><Link href="/" className="footer-logo">F/S<span>.</span></Link><p>Build after dark.<br />Flex by sunrise.</p></div>
-          <div className="footer-links"><Link href="/#rules">Rules</Link><Link href="/code-of-conduct">Code of Conduct</Link><a href="mailto:hello@fallingsun.dev">Email the organisers</a><a href="https://wa.me/" target="_blank" rel="noopener noreferrer"><MessageCircle className="inline h-4 w-4" /> WhatsApp Community</a></div>
-          <div className="footer-end"><span>FALLINGSUN / 2026</span><span>DELHI NCR, INDIA</span></div>
-        </div>
-      </footer>
+      <footer id="contact" className="site-footer"><div className="footer-ticker"><div>BUILD AFTER DARK ✳ SHIP BEFORE SUNRISE ✳ BUILD AFTER DARK ✳ SHIP BEFORE SUNRISE ✳ BUILD AFTER DARK ✳ SHIP BEFORE SUNRISE ✳</div></div><div className="page-width"><div className="footer-grid"><div className="footer-brand"><Link href="/" className="footer-logo">F/S<span>.</span></Link><p>Build after dark.<br />Flex by sunrise.</p><div className="footer-socials"><Link href="mailto:hello@fallingsun.dev" className="footer-pill">EMAIL ↗</Link><a href="https://wa.me/" target="_blank" rel="noopener noreferrer" className="footer-pill yellow"><MessageCircle className="inline h-3 w-3" /> WHATSAPP</a></div></div><div className="footer-nav-col"><p className="footer-col-title">EXPLORE // 2026</p><nav className="footer-links"><Link href="/#about">About</Link><Link href="/#schedule">Schedule</Link><Link href="/#rules">Rules</Link><Link href="/code-of-conduct">Code of Conduct</Link><Link href="/#faq">FAQ</Link></nav></div><div className="footer-meta-col"><div className="footer-meta-card"><span>LOCATION</span><strong>DELHI NCR, INDIA</strong></div><div className="footer-meta-card red"><span>EDITION</span><strong>FALLINGSUN / 2026</strong></div><div className="footer-cta-card"><p>24H • UNDER 18 • FREE TO JOIN</p><span>NO GATEKEEPING →</span></div></div></div><div className="footer-bottom"><span>© 2026 Falling Sun — Built by students, for students.</span><span className="footer-bottom-accent">DELHI NCR ✳ 30 TEAMS ✳ 100% FREE</span></div></div></footer>
     </main>
   )
 }
