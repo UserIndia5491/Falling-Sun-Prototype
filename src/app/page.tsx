@@ -31,7 +31,7 @@ const organizers = [
   { label: "Kartik Patel", image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80", imageAlt: "Kartik" },
   { label: "Ayush Sharma", image: "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?w=800&q=80", imageAlt: "Ayush" },
   { label: "Harsh", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80", imageAlt: "Harsh" },
-  { label: "Swarnash", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80", imageAlt: "Swarnash" },
+  { label: "Swaransh", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80", imageAlt: "Swaransh" },
   { label: "Roshan", image: "https://api.dicebear.com/7.x/initials/svg?seed=Roshan&backgroundColor=c0392b", imageAlt: "Roshan" },
   { label: "Yuvraj", image: "https://api.dicebear.com/7.x/initials/svg?seed=Yuvraj&backgroundColor=7ce24a", imageAlt: "Yuvraj" },
 ]
@@ -41,14 +41,16 @@ const mentors = [
   { name: "Anand", role: "Mentor", image: "https://api.dicebear.com/7.x/initials/svg?seed=Anand&backgroundColor=8b6340" },
 ]
 
-const sponsors = [
-  { src: "https://falling-sun.vercel.app/assets/llf-BrSOIe-2.jpg", alt: "LLF" },
+const sponsors: { src?: string; alt: string; text?: string }[] = [
   { src: "https://falling-sun.vercel.app/assets/Qualcomm-Logo-DvoLYaEA.png", alt: "Qualcomm" },
+  { src: "https://falling-sun.vercel.app/assets/llf-BrSOIe-2.jpg", alt: "LLF" },
+  { alt: "Bharti Airtel Foundation", text: "Bharti Airtel Foundation" },
+  { alt: "CM SHRI School, Delhi", text: "CM SHRI School, Delhi" },
   { src: "https://falling-sun.vercel.app/assets/fueler-DuVLbv5p.jpg", alt: "Fueler" },
-  { src: "https://falling-sun.vercel.app/assets/unstop-0kx1fwA9.png", alt: "Unstop" },
   { src: "https://cdn.simpleicons.org/github/3d1a00", alt: "GitHub" },
-  { src: "https://falling-sun.vercel.app/assets/xyz-CkDqFRe3.webp", alt: ".xyz Domains" },
 ]
+
+const poweredBy = { src: "https://falling-sun.vercel.app/assets/unstop-0kx1fwA9.png", alt: "Unstop" }
 
 const heroStats = ["24 HOURS (12+12)", "100% FREE", "UNDER 18", "30 TEAMS MAX"]
 
@@ -123,18 +125,19 @@ export default function Home() {
 
       {/* ── HERO ── */}
       <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-        {/* Background: poster image + video */}
+        {/* Background: full-screen mp4 video */}
         <motion.div className="absolute inset-0 z-0" style={{ scale: posterScale }}>
-          <div className="absolute inset-0 bg-[url('/falling-sun-poster.png')] bg-cover bg-center opacity-30" />
-          <div
-            aria-hidden="true"
-            className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] aspect-square rounded-full blur-[120px] opacity-25 pointer-events-none"
-            style={{ background: 'radial-gradient(circle, #7ce24a 0%, transparent 70%)' }}
-          />
-          <video autoPlay muted loop playsInline className="w-full h-full object-cover opacity-20 mix-blend-multiply">
+          <video autoPlay muted loop playsInline className="w-full h-full object-cover">
             <source src="/Animate_pixel_art_sunset_scene_202608251027_gwr_video_mvp.mp4" type="video/mp4" />
           </video>
-          <div className="absolute inset-0 bg-gradient-to-b from-[#f2ede4]/10 via-transparent to-[#f2ede4]" />
+          <div
+            aria-hidden="true"
+            className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[70vw] max-w-[700px] aspect-square rounded-full blur-[100px] opacity-20 pointer-events-none"
+            style={{ background: 'radial-gradient(circle, #7ce24a 0%, transparent 70%)' }}
+          />
+          {/* Soft overlay for text readability */}
+          <div className="absolute inset-0 bg-gradient-to-b from-[#f2ede4]/30 via-[#f2ede4]/40 to-[#f2ede4]" />
+          <div className="absolute inset-0 bg-[#f2ede4]/10" />
         </motion.div>
 
         <motion.div style={{ opacity: heroOpacity, y: heroY }} className="relative z-10 flex flex-col items-center text-center px-4">
@@ -362,20 +365,42 @@ export default function Home() {
       </section>
 
       {/* ── SPONSORS ── */}
-      <section className="py-16 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
-        <div className="max-w-5xl mx-auto px-6 text-center">
-          <p className="text-xs font-black text-[#8b6340] uppercase tracking-[0.4em] mb-2">Powered By & Supported By</p>
-          <h3 className={`text-2xl font-black text-[#2c2016] mb-3 ${markerFont.className}`}>Fuel the fall. <span className="text-[#c0392b]">Power the rise.</span></h3>
-          <p className="text-sm text-[#7a5c3e] max-w-xl mx-auto mb-10">Our sponsors kill the paywall — <span className="font-black text-[#2c2016] highlight-marker">100% free</span> for every teen who wants to build. No tickets, just talent.</p>
-          <div className="flex flex-wrap items-center justify-center gap-10 md:gap-16">
+      <section className="py-20 md:py-28 bg-[#ede4d0] border-y-2 border-[#2c2016]/10">
+        <div className="max-w-6xl mx-auto px-6 text-center">
+          <p className="text-xs font-black text-[#8b6340] uppercase tracking-[0.4em] mb-3">Powered By & Supported By</p>
+          <h3 className={`text-3xl md:text-4xl font-black text-[#2c2016] mb-4 ${markerFont.className}`}>Fuel the fall. <span className="text-[#c0392b]">Power the rise.</span></h3>
+          <p className="text-sm md:text-base text-[#7a5c3e] max-w-2xl mx-auto mb-12">Our sponsors kill the paywall — <span className="font-black text-[#2c2016] highlight-marker">100% free</span> for every teen who wants to build. No tickets, just talent.</p>
+
+          {/* Powered by Unstop - Featured */}
+          <div className="mb-12">
+            <p className="text-[10px] font-black tracking-[0.3em] uppercase text-[#8b6340] mb-4">Powered By</p>
+            <motion.div whileHover={{ scale: 1.05, y: -4 }} transition={{ type: 'spring', stiffness: 300 }} className="inline-flex flex-col items-center gap-3 bg-white border-2 border-[#2c2016]/15 rounded-2xl px-10 py-6 shadow-[6px_6px_0_rgba(44,32,22,0.12)] hover:shadow-[8px_8px_0_rgba(44,32,22,0.15)] hover:border-[#c0392b]/30 transition-all">
+              <img src={poweredBy.src} alt={poweredBy.alt} className="h-12 md:h-16 w-auto object-contain" />
+              <span className="text-[11px] font-black tracking-widest uppercase text-[#2c2016]">{poweredBy.alt} — Powered by Unstop</span>
+            </motion.div>
+          </div>
+
+          <div className="h-px w-full max-w-2xl mx-auto bg-[#2c2016]/10 mb-12" />
+
+          {/* Sponsors Grid - Bigger */}
+          <p className="text-[10px] font-black tracking-[0.3em] uppercase text-[#8b6340] mb-6">In Partnership With</p>
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 max-w-4xl mx-auto">
             {sponsors.map((s, i) => (
-              <motion.div key={i} whileHover={{ scale: 1.15, rotate: -3 }} transition={{ type: 'spring', stiffness: 300 }}>
-                <img src={s.src} alt={s.alt} className="h-8 w-auto grayscale hover:grayscale-0 transition-all" />
+              <motion.div key={i} whileHover={{ scale: 1.05, y: -4 }} transition={{ type: 'spring', stiffness: 300 }} className="bg-white border-2 border-[#2c2016]/10 rounded-2xl p-6 flex flex-col items-center justify-center gap-3 shadow-[4px_4px_0_rgba(44,32,22,0.08)] hover:shadow-[6px_6px_0_rgba(44,32,22,0.12)] hover:border-[#c0392b]/20 transition-all min-h-[140px]">
+                {s.src ? (
+                  <img src={s.src} alt={s.alt} className="h-12 md:h-14 w-auto max-w-[160px] object-contain" />
+                ) : (
+                  <div className="text-center flex flex-col items-center">
+                    <div className="w-12 h-12 mb-2 rounded-xl bg-[#2c2016] flex items-center justify-center text-[#7ce24a] font-black text-lg border-2 border-[#2c2016] shadow-[2px_2px_0_rgba(44,32,22,0.2)]">{s.alt.charAt(0)}</div>
+                    <span className="font-black text-[#2c2016] text-sm leading-tight block">{s.text}</span>
+                  </div>
+                )}
+                <span className="text-[10px] font-black tracking-widest uppercase text-[#8b6340] text-center leading-tight">{s.alt}</span>
               </motion.div>
             ))}
           </div>
-          <div className="mt-10">
-            <a href="#contact" className="inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] font-bold px-6 py-3 rounded-xl border-2 border-[#2c2016] hover:bg-[#c0392b] hover:border-[#c0392b] transition-colors shadow-[4px_4px_0_rgba(44,32,22,0.3)] group">
+          <div className="mt-12">
+            <a href="#contact" className="inline-flex items-center gap-2 bg-[#2c2016] text-[#f2ede4] font-bold px-8 py-4 rounded-xl border-2 border-[#2c2016] hover:bg-[#c0392b] hover:border-[#c0392b] transition-colors shadow-[4px_4px_0_rgba(44,32,22,0.3)] group text-sm">
               Back the Builders <span className="group-hover:translate-x-1 transition-transform">→</span>
             </a>
           </div>
