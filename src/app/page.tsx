@@ -23,12 +23,12 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 const organizers = [
   { label: "Tanmay", image: "/IMG-20260826-WA0095.jpg", imageAlt: "Tanmay", role: "Organizer" },
   { label: "Kartik Patel", image: "/IMG-20260828-WA0062.jpg", imageAlt: "Kartik", role: "Organizer" },
-  { label: "Ayush Sharma", image: "", imageAlt: "Ayush", role: "Organizer" },
+  { label: "Ayush Sharma", image: "/IMG_20260828_215046.jpg", imageAlt: "Ayush", role: "Organizer" },
 ]
 
 const coOrganizers = [
   { label: "Harsh", image: "https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=800&q=80", imageAlt: "Harsh", role: "Co-Organizer" },
-  { label: "Swaransh", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=800&q=80", imageAlt: "Swaransh", role: "Co-Organizer" },
+{ label: "Swaransh", image: "/IMG-20260828-WA0061.jpg", imageAlt: "Swaransh", role: "Co-Organizer" },
   { label: "Roshan", image: "https://api.dicebear.com/7.x/initials/svg?seed=Roshan&backgroundColor=c0392b", imageAlt: "Roshan", role: "Co-Organizer" },
   { label: "Yuvraj", image: "https://api.dicebear.com/7.x/initials/svg?seed=Yuvraj&backgroundColor=7ce24a", imageAlt: "Yuvraj", role: "Co-Organizer" },
 ]
