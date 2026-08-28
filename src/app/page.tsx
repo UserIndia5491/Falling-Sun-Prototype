@@ -20,11 +20,10 @@ import {
 } from "lucide-react"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 
-
 const organizers = [
-  { label: "Tanmay", image: "/tanmay", imageAlt: "Tanmay", role: "Organizer" },
-  { label: "Kartik Patel", image: "/kartik.png", imageAlt: "Kartik", role: "Organizer" },
-  { label: "Ayush Sharma", image: "/ayush", imageAlt: "Ayush", role: "Organizer" },
+  { label: "Tanmay", image: "/IMG-20260826-WA0095.jpg", imageAlt: "Tanmay", role: "Organizer" },
+  { label: "Kartik Patel", image: "/IMG-20260828-WA0062.jpg", imageAlt: "Kartik", role: "Organizer" },
+  { label: "Ayush Sharma", image: "", imageAlt: "Ayush", role: "Organizer" },
 ]
 
 const coOrganizers = [
